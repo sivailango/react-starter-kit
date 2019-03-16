@@ -27,30 +27,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
 ### Making a Progressive Web App
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
@@ -66,3 +42,133 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### Full Battery
+
+Axios
+Bootstrap
+Reactstrap
+Redux
+React Redux
+Redux Form
+Redux Logger
+Redux Thunk
+React Router Dom
+
+Flow
+https://facebook.github.io/create-react-app/docs/adding-flow
+
+https://github.com/okonet/lint-staged
+https://prettier.io/
+https://github.com/typicode/husky
+
+```
+npx create-react-app my-app
+cd my-app
+npm start
+```
+
+### Upgrade Create React App
+
+```
+npm install react-scripts@latest
+```
+
+### Setup Editor
+
+#### Displaying Lint Output in the Editor
+
+You would need to install an ESLint plugin for your editor first. Then, add a file called .eslintrc.json to the project root:
+
+```
+{
+  "extends": "react-app",
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error"
+  }
+}
+```
+
+#### Apply Prettier Formatting on Save (Optional)
+
+You most likely want to apply the Prettier formatting whenever you save your files. To do so, add the following to your Visual Studio Code Workspace Settings:
+
+```
+"editor.formatOnSave": true
+```
+
+#### Debugging in the Editor
+
+_Visual Studio Code_
+You would need to have the latest version of VS Code and VS Code Chrome Debugger Extension installed.
+
+Then add the block below to your launch.json file and put it inside the .vscode folder in your app’s root directory.
+
+```
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/src",
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/*"
+      }
+    }
+  ]
+}
+```
+
+Note: the URL may be different if you've made adjustments via the HOST or PORT environment variables.
+
+Start your app by running npm start, and start debugging in VS Code by pressing F5 or by clicking the green debug icon. You can now write code, set breakpoints, make changes to the code, and debug your newly modified code—all from your editor.
+
+#### Formatting Code Automatically
+
+```
+npm install --save husky lint-staged prettier
+```
+
+Add the following field to the package.json section:
+
+```
+"husky": {
+    "hooks": {
+        "pre-commit": "lint-staged"
+    }
+}
+```
+
+Next we add a 'lint-staged' field to the package.json, for example:
+
+```
+"lint-staged": {
+    "src/\*_/_.{js,jsx,ts,tsx,json,css,scss,md}": [
+        "prettier --single-quote --write",
+        "git add"
+    ]
+},
+```
+
+https://medium.com/technical-credit/using-prettier-with-vs-code-and-create-react-app-67c2449b9d08
+
+### Use Static Folder
+
+You may create subdirectories inside src. For faster rebuilds, only files inside src are processed by Webpack. You need to put any JS and CSS files inside src, otherwise Webpack won’t see them.
+
+Only files inside public can be used from public/index.html. Read instructions below for using assets from JavaScript and HTML.
+
+You can, however, create more top-level directories. They will not be included in the production build so you can use them for things like documentation.
+
+### Commands
+
+```
+npm start
+npm test
+npm run build
+npm run analyze
+```
