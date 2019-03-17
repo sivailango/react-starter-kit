@@ -5,11 +5,21 @@ import './App.css';
 
 import { Button } from 'reactstrap';
 
+import Header from './components/layout/Header';
+import SideBar from './components/layout/SideBar';
+import PageContent from './components/layout/PageContent';
+import Footer from './components/layout/Footer';
+
 class App extends Component {
   render() {
     return (
-      <div>
-        <Button color="danger">Danger!</Button>
+      <div id="page-wrapper">
+        <SideBar />
+        <div id="page-container">
+          <Header />
+          <PageContent />
+          <Footer />
+        </div>
       </div>
     );
   }
