@@ -3,8 +3,6 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { Button } from 'reactstrap';
-
 import Header from './components/layout/Header';
 import SideBar from './components/layout/SideBar';
 import PageContent from './components/layout/PageContent';
