@@ -4,14 +4,20 @@ import { NavLink, Collapse } from 'reactstrap';
 
 import sideBarRoutes from './../../routes/Sidebar.Routes';
 
-export default class SideBar extends Component {
-  constructor(props) {
+interface Props {}
+
+interface State {
+  activeSubMenu: any;
+}
+
+export default class SideBar extends React.Component<Props, State> {
+  constructor(props: any) {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.state = { activeSubMenu: undefined };
   }
 
-  toggle(e) {
+  toggle(e: number) {
     console.log(e);
     if (this.state.activeSubMenu === e) {
       this.setState(state => ({
@@ -39,7 +45,7 @@ export default class SideBar extends Component {
                       className="sidebar-nav-link"
                       onClick={() => this.toggle(v.index)}
                     >
-                      <i className="nav-link-icon mdi mdi-home-outline" />
+                      <i className={`nav-link-icon mdi ${v.icon}`} />
                       {v.label}
                       <i className="mdi mdi-chevron-right" />
                     </NavLink>
@@ -69,7 +75,7 @@ export default class SideBar extends Component {
                       className="sidebar-nav-link"
                       onClick={() => this.toggle(v.index)}
                     >
-                      <i className="nav-link-icon mdi mdi-home-outline" />
+                      <i className={`nav-link-icon mdi ${v.icon}`} />
                       {v.label}
                     </NavLink>
                   </li>
