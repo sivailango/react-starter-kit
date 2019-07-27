@@ -11,13 +11,22 @@ import {
 } from 'formik';
 import { StringLiteral } from '@babel/types';
 
+interface Props {
+  config?: any;
+}
+
 interface MyFormValues {
   first_name: string;
   email: string;
   gender: string;
 }
 
-export default class SignupForm extends React.Component {
+export default class SignupForm extends React.Component<Props> {
+  constructor(props: any) {
+    super(props);
+    console.log(props.config);
+  }
+
   handleSubmit = (values: MyFormValues, { props = this.props }) => {
     alert(JSON.stringify(values, null, 2));
     // setSubmitting(false);
@@ -55,6 +64,7 @@ export default class SignupForm extends React.Component {
           actions.setSubmitting(false);
         }}
         render={formProps => {
+          console.log(formProps);
           return (
             <Form>
               <Field
@@ -72,7 +82,6 @@ export default class SignupForm extends React.Component {
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </Field>
-
               <ErrorMessage name="gender" />
 
               <button type="submit" disabled={formProps.isSubmitting}>

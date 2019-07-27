@@ -45,22 +45,16 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 ### Full Battery
 
-Axios
-Bootstrap
-Reactstrap
-Redux
-React Redux
-Redux Form
-Redux Logger
-Redux Thunk
-React Router Dom
-
-Flow
-https://facebook.github.io/create-react-app/docs/adding-flow
-
-https://github.com/okonet/lint-staged
-https://prettier.io/
-https://github.com/typicode/husky
+- Axios
+- Bootstrap
+- Reactstrap
+- Redux
+- React Redux
+- Redux Form
+- Redux Logger
+- Redux Thunk
+- React Router Dom
+- Formik
 
 ```
 npx create-react-app my-app
@@ -173,4 +167,16 @@ npm run build
 npm run analyze
 ```
 
+#### Useful Links
+
+- https://github.com/piotrwitek/react-redux-typescript-guide
+- https://medium.com/swinginc/react-redux-typescript-into-the-better-frontend-tutorial-d32f46e97995
+- https://facebook.github.io/create-react-app/docs/adding-flow
+- https://github.com/okonet/lint-staged
+- https://prettier.io/
+- https://github.com/typicode/husky
+
 ### Useful NPM Modules
+
+- https://jaredpalmer.com/formik/
+- https://github.com/styled-components/styled-components

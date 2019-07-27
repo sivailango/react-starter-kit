@@ -14,12 +14,33 @@ import { IButton } from './components/lib/Index';
 
 import Form from './components/lib/Form';
 import SignupForm from './components/forms/SignupForm';
+import DynamicForm from './components/lib/DynamicForm';
+
+import FieldConfig from './models/InputFieldConfig';
 
 class App extends Component {
   handleSubmit(values: any) {
     console.log(values);
   }
   render() {
+    const fields: Array<FieldConfig> = [
+      {
+        id: 'firstName',
+        label: 'First Name',
+        type: 'text',
+        name: 'companyName',
+        value: 'FSS',
+      },
+      {
+        id: 'country',
+        label: 'Country',
+        type: 'select',
+        name: 'country',
+        value: '',
+        options: [{ value: '1', label: 'India' }],
+      },
+    ];
+    const commonProps = { myProp1: 'prop1', myProp2: 'prop2' };
     return (
       <div id="page-wrapper">
         <SideBar />
@@ -27,7 +48,8 @@ class App extends Component {
           <Header />
           <PageContent />
           <Form onSubmit={this.handleSubmit} />
-          <SignupForm />
+          <SignupForm config={commonProps} />
+          <DynamicForm fields={fields} />
           <IButton label="Submit" />
           <Footer />
         </div>
