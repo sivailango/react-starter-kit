@@ -13,6 +13,7 @@ import Footer from './components/layout/Footer';
 import { IButton } from './components/lib/Index';
 
 import Form from './components/lib/Form';
+import SignupForm from './components/forms/SignupForm';
 
 class App extends Component {
   handleSubmit(values: any) {
@@ -26,6 +27,7 @@ class App extends Component {
           <Header />
           <PageContent />
           <Form onSubmit={this.handleSubmit} />
+          <SignupForm />
           <IButton label="Submit" />
           <Footer />
         </div>
