@@ -172,3 +172,5 @@ npm test
 npm run build
 npm run analyze
 ```
+
+### Useful NPM Modules
