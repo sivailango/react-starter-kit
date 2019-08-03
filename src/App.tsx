@@ -37,7 +37,36 @@ class App extends Component {
         type: 'select',
         name: 'country',
         value: '',
-        options: [{ value: '1', label: 'India' }],
+        options: [{ id: true, value: '1', label: 'India' }],
+      },
+      {
+        id: 'is_agreed',
+        label: 'I agree',
+        type: 'checkbox',
+        name: 'is_agreed',
+        value: false,
+      },
+      {
+        id: 'category_ids',
+        label: 'Languages',
+        type: 'checkbox_group',
+        name: 'category_ids',
+        value: [],
+        options: [
+          { id: 'en', value: 'en', label: 'English' },
+          { id: 'tamil', value: 'tamil', label: 'Tamil' },
+        ],
+      },
+      {
+        id: 'country',
+        label: 'Languages',
+        type: 'radio',
+        name: 'country',
+        value: '',
+        options: [
+          { id: 'india', value: 'india', label: 'India' },
+          { id: 'us', value: 'us', label: 'US' },
+        ],
       },
     ];
     const commonProps = { myProp1: 'prop1', myProp2: 'prop2' };
@@ -46,11 +75,11 @@ class App extends Component {
         <SideBar />
         <div id="page-container">
           <Header />
-          <PageContent />
+          {/*
           <Form onSubmit={this.handleSubmit} />
-          <SignupForm config={commonProps} />
+          */}
           <DynamicForm fields={fields} />
-          <IButton label="Submit" />
+          <PageContent />
           <Footer />
         </div>
       </div>

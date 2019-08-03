@@ -1,7 +1,23 @@
 import React, { Component, Fragment } from 'react';
-import { Formik, Field } from 'formik';
+import { Formik, Field, FieldArray } from 'formik';
 
 import FieldConfig from 'models/InputFieldConfig';
+
+import { DisplayFormikState } from './FormikDebug';
+
+// import CheckboxGroup from './CheckboxGroup';
+import Checkbox from './Checkbox';
+
+import {
+  Col,
+  Row,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  FormText,
+} from 'reactstrap';
 
 interface Props {
   fields: Array<FieldConfig>;
@@ -13,13 +29,19 @@ class DynamicForm extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
   }
-  renderFields(inputs: Array<FieldConfig>) {
+  renderFields(inputs: Array<FieldConfig>, form: any) {
     return inputs.map(input => {
       if (input.type === 'select') {
+        // DONE
         return this.renderSelect(input);
       }
+      if (input.type === 'checkbox_group') {
+        // DONE
+        return this.renderCheckboxes(input, form);
+      }
       if (input.type === 'checkbox') {
-        return this.renderCheckboxes(input);
+        // DONE
+        return this.renderCheckbox(input);
       }
       if (input.type === 'textarea') {
         return this.renderTextarea(input);
@@ -34,7 +56,12 @@ class DynamicForm extends React.Component<Props> {
         return this.renderDatePicker(input);
       }
       if (input.type === 'text') {
+        // DONE
         return this.renderTextbox(input);
+      }
+      if (input.type === 'radio') {
+        // DONE
+        return this.renderRadioButtons(input, form);
       }
     });
   }
@@ -56,11 +83,90 @@ class DynamicForm extends React.Component<Props> {
     );
   }
 
-  renderCheckboxes(input: FieldConfig) {}
+  renderCheckbox(item: any) {
+    return (
+      <FormGroup check key={item.id}>
+        <Label check>
+          <Field
+            component={Checkbox}
+            name={item.name}
+            id={item.value}
+            label={item.label}
+          />
+        </Label>
+      </FormGroup>
+    );
+  }
+
+  renderCheckboxes(input: FieldConfig, form: any) {
+    /*
+    const cb = input.options!.map(o => {
+      return this.renderCheckbox(o);
+    });
+
+    console.log(cb);
+    */
+
+    return (
+      <FieldArray
+        name={input.name}
+        render={arrayHelpers => (
+          <div>
+            {input.options!.map(o => (
+              <div key={o.id}>
+                <label>
+                  <input
+                    name={input.name}
+                    type="checkbox"
+                    value={o.id}
+                    checked={form.values[input.name].includes(o.id)}
+                    onChange={e => {
+                      if (e.target.checked) arrayHelpers.push(o.id);
+                      else {
+                        const idx = form.values[input.name].indexOf(o.id);
+                        arrayHelpers.remove(idx);
+                      }
+                    }}
+                  />{' '}
+                  {o.label}
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
+      />
+    );
+  }
 
   renderToggle(input: FieldConfig) {}
 
-  renderRadioButtons(input: FieldConfig) {}
+  renderRadioButtons(input: FieldConfig, form: any) {
+    console.log(form);
+    return (
+      <FieldArray
+        name={input.name}
+        render={arrayHelpers => (
+          <div>
+            {input.options!.map(o => (
+              <div key={o.id}>
+                <label>
+                  <input
+                    name={input.name}
+                    id={o.id}
+                    type="radio"
+                    value={o.id}
+                    checked={form.values[input.name].includes(o.id)}
+                    onChange={form.handleChange}
+                  />
+                  {o.label}
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
+      />
+    );
+  }
 
   renderDatePicker(input: FieldConfig) {}
 
@@ -133,14 +239,16 @@ class DynamicForm extends React.Component<Props> {
           validationSchema={this.props.validation}
           initialValues={initialValues}
           render={form => {
+            console.log(form);
             return (
               <div>
                 <form onSubmit={form.handleSubmit}>
-                  {this.renderFields(this.props.fields)}
+                  {this.renderFields(this.props.fields, form)}
                   <button type="submit" className="btn">
                     Submit
                   </button>
                 </form>
+                <DisplayFormikState {...form.values} />
               </div>
             );
           }}
@@ -151,3 +259,8 @@ class DynamicForm extends React.Component<Props> {
 }
 
 export default DynamicForm;
+
+/*
+https://codesandbox.io/s/q4qx876j
+https://codesandbox.io/s/o5pw1vx916
+*/

@@ -15,10 +15,12 @@ export interface FieldConfig {
     | 'toggle'
     | 'select'
     | 'checkbox'
-    | 'number';
+    | 'number'
+    | 'checkbox_group'
+    | 'radio';
   placeholder?: string;
   label?: string;
-  options?: Array<{ value: any; label: string }>;
+  options?: Array<{ id: any; value: any; label: string }>;
   class?: string;
 }
 
