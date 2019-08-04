@@ -63,7 +63,7 @@ class DynamicForm extends React.Component<Props> {
       }
       if (input.type === 'text') {
         // DONE
-        return this.renderTextbox(input);
+        return this.renderTextbox(input, form);
       }
       if (input.type === 'radio') {
         // DONE
@@ -88,7 +88,7 @@ class DynamicForm extends React.Component<Props> {
     );
   }
 
-  renderTextbox(input: FieldConfig) {
+  renderTextbox(input: FieldConfig, form: any) {
     return (
       <Fragment key={input.id}>
         <label>{input.label}</label>
@@ -97,9 +97,22 @@ class DynamicForm extends React.Component<Props> {
             name={input.name}
             render={(props: any) => {
               const { field } = props;
-              return <input {...field} type="text" />;
+              return (
+                <input
+                  {...field}
+                  type="text"
+                  className={
+                    form.errors[input.name] && form.touched[input.name]
+                      ? 'form-control is-invalid'
+                      : 'form-control'
+                  }
+                />
+              );
             }}
           />
+          {form.errors[input.name] && form.touched[input.name] && (
+            <div>{form.errors[input.name]}</div>
+          )}
         </div>
       </Fragment>
     );

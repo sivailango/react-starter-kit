@@ -24,7 +24,6 @@ class CheckboxGroup extends React.Component<any, any> {
   };
 
   handleBlur = () => {
-    // take care of touched
     this.props.onBlur(this.props.id, true);
   };
 

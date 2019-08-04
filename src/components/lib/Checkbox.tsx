@@ -1,16 +1,4 @@
 import React from 'react';
-/*
-interface Props {
-  children: any;
-  field: any;
-  id: any;
-  name: string;
-  onChange: any;
-  value: any;
-  label: any;
-  form: any;
-}
-*/
 
 class Checkbox extends React.Component<any, any> {
   constructor(props: any) {

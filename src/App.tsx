@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import * as Yup from 'yup';
+
 import './App.css';
 
 import Header from './components/layout/Header';
@@ -25,11 +27,11 @@ class App extends Component {
   render() {
     const fields: Array<FieldConfig> = [
       {
-        id: 'firstName',
+        id: 'companyName',
         label: 'First Name',
         type: 'text',
         name: 'companyName',
-        value: 'FSS',
+        value: '',
       },
       {
         id: 'country',
@@ -91,6 +93,13 @@ class App extends Component {
         value: '',
       },
     ];
+    const SignupSchema = Yup.object().shape({
+      companyName: Yup.string()
+        .min(2, 'Too Short!')
+        .max(50, 'Too Long!')
+        .required('Required'),
+    });
+
     const commonProps = { myProp1: 'prop1', myProp2: 'prop2' };
     return (
       <div>
@@ -106,7 +115,7 @@ class App extends Component {
           <Footer />
           */}
 
-          <DynamicForm fields={fields} />
+          <DynamicForm fields={fields} validation={SignupSchema} />
         </div>
       </div>
     );
