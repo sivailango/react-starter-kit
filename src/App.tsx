@@ -37,7 +37,10 @@ class App extends Component {
         type: 'select',
         name: 'country',
         value: '',
-        options: [{ id: true, value: '1', label: 'India' }],
+        options: [
+          { id: '1', value: '1', label: 'India' },
+          { id: '2', value: '2', label: 'UK' },
+        ],
       },
       {
         id: 'is_agreed',
@@ -58,29 +61,52 @@ class App extends Component {
         ],
       },
       {
-        id: 'country',
+        id: 'radio_country',
         label: 'Languages',
         type: 'radio',
-        name: 'country',
+        name: 'radio_country',
         value: '',
         options: [
           { id: 'india', value: 'india', label: 'India' },
           { id: 'us', value: 'us', label: 'US' },
         ],
       },
+      {
+        id: 'mobiles',
+        label: 'Languages',
+        type: 'react_select',
+        name: 'mobiles',
+        value: [],
+        options: [
+          { value: 'india', label: 'India' },
+          { value: 'us', label: 'US' },
+          { value: 'uk', label: 'UK' },
+        ],
+      },
+      {
+        id: 'start_date',
+        label: 'Start Date',
+        type: 'datepicker',
+        name: 'start_date',
+        value: '',
+      },
     ];
     const commonProps = { myProp1: 'prop1', myProp2: 'prop2' };
     return (
-      <div id="page-wrapper">
-        <SideBar />
-        <div id="page-container">
+      <div>
+        {/*
+          <SideBar />
           <Header />
+        */}
+
+        <div>
           {/*
           <Form onSubmit={this.handleSubmit} />
-          */}
-          <DynamicForm fields={fields} />
           <PageContent />
           <Footer />
+          */}
+
+          <DynamicForm fields={fields} />
         </div>
       </div>
     );

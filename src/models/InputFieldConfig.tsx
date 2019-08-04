@@ -17,10 +17,11 @@ export interface FieldConfig {
     | 'checkbox'
     | 'number'
     | 'checkbox_group'
-    | 'radio';
+    | 'radio'
+    | 'react_select';
   placeholder?: string;
   label?: string;
-  options?: Array<{ id: any; value: any; label: string }>;
+  options?: Array<{ id?: any; value: any; label: string }>;
   class?: string;
 }
 

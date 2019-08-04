@@ -1,65 +1,36 @@
-import { FieldProps } from 'formik';
-import React from 'react';
+import React, { Component, Fragment } from 'react';
+
 import Select from 'react-select';
-import { OptionsType, ValueType } from 'react-select/lib/types';
 
-interface Option {
-  label: string;
-  value: string;
-}
+class ReactSelect extends React.Component<any> {
+  constructor(props: any) {
+    super(props);
+  }
 
-interface CustomSelectProps extends FieldProps {
-  options: OptionsType<Option>;
-  isMulti?: boolean;
-  className?: string;
-  placeholder?: string;
-}
+  handleChange = (value: any) => {
+    console.log(value);
+    this.props.onChange(this.props.fieldConfig.name, value);
+  };
 
-export const CustomSelect = ({
-  className,
-  placeholder,
-  field,
-  form,
-  options,
-  isMulti = false,
-}: CustomSelectProps) => {
-  const onChange = (option: ValueType<Option | Option[]>) => {
-    form.setFieldValue(
-      field.name,
-      isMulti
-        ? (option as Option[]).map((item: Option) => item.value)
-        : (option as Option).value
+  handleBlur = () => {
+    this.props.onBlur(this.props.fieldConfig.name, true);
+  };
+
+  render() {
+    return (
+      <div>
+        <label htmlFor="color">{this.props.fieldConfig.label}</label>
+        <Select
+          id={this.props.fieldConfig.id}
+          options={this.props.fieldConfig.options}
+          onChange={this.handleChange}
+          onBlur={this.handleBlur}
+          isMulti={true}
+          value={this.props.fieldConfig.values}
+        />
+      </div>
     );
-  };
+  }
+}
 
-  const getValue = () => {
-    if (options) {
-      return isMulti
-        ? options.filter(option => field.value.indexOf(option.value) >= 0)
-        : options.find(option => option.value === field.value);
-    } else {
-      return isMulti ? [] : ('' as any);
-    }
-  };
-
-  return (
-    <div>
-      <Select
-        className={className}
-        name={field.name}
-        value={getValue()}
-        onChange={onChange}
-        placeholder={placeholder}
-        options={options}
-        isMulti={isMulti}
-      />
-      {!!this.props.error && this.props.touched && (
-        <div style={{ color: 'red', marginTop: '.5rem' }}>
-          {this.props.error}
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default CustomSelect;
+export default ReactSelect;

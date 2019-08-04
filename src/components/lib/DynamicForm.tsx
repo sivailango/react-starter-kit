@@ -6,7 +6,9 @@ import FieldConfig from 'models/InputFieldConfig';
 import { DisplayFormikState } from './FormikDebug';
 
 // import CheckboxGroup from './CheckboxGroup';
+import ReactSelect from './Select';
 import Checkbox from './Checkbox';
+import CustomDatePicker from './DatePicker';
 
 import {
   Col,
@@ -35,6 +37,10 @@ class DynamicForm extends React.Component<Props> {
         // DONE
         return this.renderSelect(input);
       }
+
+      if (input.type === 'react_select') {
+        return this.renderReactSelect(input, form);
+      }
       if (input.type === 'checkbox_group') {
         // DONE
         return this.renderCheckboxes(input, form);
@@ -53,7 +59,7 @@ class DynamicForm extends React.Component<Props> {
         return this.renderTimePicker(input);
       }
       if (input.type === 'datepicker') {
-        return this.renderDatePicker(input);
+        return this.renderDatePicker(input, form);
       }
       if (input.type === 'text') {
         // DONE
@@ -64,6 +70,22 @@ class DynamicForm extends React.Component<Props> {
         return this.renderRadioButtons(input, form);
       }
     });
+  }
+
+  renderReactSelect(input: FieldConfig, form: any) {
+    return (
+      <ReactSelect
+        options={input.options}
+        value={form.values[input.name]}
+        onChange={form.setFieldValue}
+        onBlur={form.setFieldTouched}
+        error={form.errors[input.name]}
+        touched={form.touched[input.name]}
+        fieldConfig={input}
+        form={form}
+        multi={true}
+      />
+    );
   }
 
   renderTextbox(input: FieldConfig) {
@@ -141,7 +163,6 @@ class DynamicForm extends React.Component<Props> {
   renderToggle(input: FieldConfig) {}
 
   renderRadioButtons(input: FieldConfig, form: any) {
-    console.log(form);
     return (
       <FieldArray
         name={input.name}
@@ -168,7 +189,16 @@ class DynamicForm extends React.Component<Props> {
     );
   }
 
-  renderDatePicker(input: FieldConfig) {}
+  renderDatePicker(input: FieldConfig, form: any) {
+    return (
+      <CustomDatePicker
+        name={input.name}
+        value={form.values[input.name]}
+        onChange={form.setFieldValue}
+        form={form}
+      />
+    );
+  }
 
   renderFile(input: FieldConfig) {}
 
@@ -176,7 +206,16 @@ class DynamicForm extends React.Component<Props> {
 
   renderTimePicker(input: FieldConfig) {}
 
-  renderDataTimePicker(input: FieldConfig) {}
+  renderDataTimePicker(input: FieldConfig, form: any) {
+    return (
+      <CustomDatePicker
+        name={input.name}
+        value={form.values[input.name]}
+        onChange={form.setFieldValue}
+        form={form}
+      />
+    );
+  }
 
   renderSelect(input: FieldConfig) {
     return (
@@ -231,29 +270,40 @@ class DynamicForm extends React.Component<Props> {
   render() {
     const initialValues = this.getInitialValues(this.props.fields);
     return (
-      <div>
-        <Formik
-          onSubmit={values => {
-            console.log(values);
-          }}
-          validationSchema={this.props.validation}
-          initialValues={initialValues}
-          render={form => {
-            console.log(form);
-            return (
-              <div>
-                <form onSubmit={form.handleSubmit}>
-                  {this.renderFields(this.props.fields, form)}
-                  <button type="submit" className="btn">
-                    Submit
-                  </button>
-                </form>
-                <DisplayFormikState {...form.values} />
-              </div>
-            );
-          }}
-        />
-      </div>
+      <Formik
+        onSubmit={values => {
+          console.log(values);
+        }}
+        validationSchema={this.props.validation}
+        initialValues={initialValues}
+        render={form => {
+          console.log(form);
+          return (
+            <Row>
+              <Col sm={{ size: 6 }}>
+                <div>
+                  <form onSubmit={form.handleSubmit}>
+                    {this.renderFields(this.props.fields, form)}
+                    <button
+                      type="reset"
+                      className="btn"
+                      onClick={form.handleReset}
+                    >
+                      Reset
+                    </button>
+                    <button type="submit" className="btn">
+                      Submit
+                    </button>
+                  </form>
+                </div>
+              </Col>
+              <Col sm={{ size: 6 }}>
+                <DisplayFormikState {...form} />
+              </Col>
+            </Row>
+          );
+        }}
+      />
     );
   }
 }
@@ -263,4 +313,5 @@ export default DynamicForm;
 /*
 https://codesandbox.io/s/q4qx876j
 https://codesandbox.io/s/o5pw1vx916
+https://codesandbox.io/s/7259y11530
 */
