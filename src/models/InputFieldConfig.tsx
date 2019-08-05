@@ -23,6 +23,7 @@ export interface FieldConfig {
   label?: string;
   options?: Array<{ id?: any; value: any; label: string }>;
   class?: string;
+  validation?: {};
 }
 
 export default FieldConfig;

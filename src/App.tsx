@@ -98,6 +98,7 @@ class App extends Component {
         .min(2, 'Too Short!')
         .max(50, 'Too Long!')
         .required('Required'),
+      start_date: Yup.string().required('Required'),
     });
 
     const commonProps = { myProp1: 'prop1', myProp2: 'prop2' };

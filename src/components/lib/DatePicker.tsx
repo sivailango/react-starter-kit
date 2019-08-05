@@ -14,6 +14,12 @@ export default class CustomDatePicker extends React.Component<any> {
           this.props.onChange(this.props.name, v);
         }}
         dateFormat="dd/MM/yyyy"
+        className={
+          this.props.form.errors[this.props.name] &&
+          this.props.form.touched[this.props.name]
+            ? 'form-control is-invalid'
+            : 'form-control'
+        }
       />
     );
   }
