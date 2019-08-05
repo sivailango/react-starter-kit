@@ -8,14 +8,22 @@ export default class CustomDatePicker extends React.Component<any> {
   }
   render() {
     return (
-      <DatePicker
-        selected={(this.props.value && new Date(this.props.value)) || null}
-        onChange={(v: any) => {
-          this.props.onChange(this.props.name, v);
-        }}
-        dateFormat="dd/MM/yyyy"
-        className="form-control"
-      />
+      <div>
+        <label>{this.props.field.label}</label>
+        <DatePicker
+          selected={(this.props.value && new Date(this.props.value)) || null}
+          onChange={(v: any) => {
+            this.props.onChange(this.props.name, v);
+          }}
+          dateFormat="dd/MM/yyyy"
+          className={
+            this.props.form.errors[this.props.name] &&
+            this.props.form.touched[this.props.name]
+              ? 'form-control is-invalid'
+              : 'form-control'
+          }
+        />
+      </div>
     );
   }
 }

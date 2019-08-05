@@ -27,6 +27,15 @@ class ReactSelect extends React.Component<any> {
           onBlur={this.handleBlur}
           isMulti={true}
           value={this.props.fieldConfig.values}
+          className={
+            this.props.form.errors[this.props.fieldConfig.name] &&
+            this.props.form.touched[this.props.fieldConfig.name]
+              ? 'is-invalid'
+              : ''
+          }
+          components={{
+            IndicatorSeparator: () => null,
+          }}
         />
       </div>
     );

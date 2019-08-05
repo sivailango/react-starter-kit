@@ -59,6 +59,7 @@ class DynamicForm extends React.Component<Props> {
         return this.renderTimePicker(input);
       }
       if (input.type === 'datepicker') {
+        // DONE
         return this.renderDatePicker(input, form);
       }
       if (input.type === 'text') {
@@ -206,6 +207,7 @@ class DynamicForm extends React.Component<Props> {
     return (
       <CustomDatePicker
         name={input.name}
+        field={input}
         value={form.values[input.name]}
         onChange={form.setFieldValue}
         form={form}
