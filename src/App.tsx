@@ -92,6 +92,13 @@ class App extends Component {
         name: 'start_date',
         value: '',
       },
+      {
+        id: 'password',
+        label: 'Password',
+        type: 'password',
+        name: 'password',
+        value: '',
+      },
     ];
     const SignupSchema = Yup.object().shape({
       companyName: Yup.string()

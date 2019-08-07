@@ -9,6 +9,7 @@ import { DisplayFormikState } from './FormikDebug';
 import ReactSelect from './Select';
 import Checkbox from './Checkbox';
 import CustomDatePicker from './DatePicker';
+import Password from './Password';
 
 import {
   Col,
@@ -39,6 +40,7 @@ class DynamicForm extends React.Component<Props> {
       }
 
       if (input.type === 'react_select') {
+        // DONE
         return this.renderReactSelect(input, form);
       }
       if (input.type === 'checkbox_group') {
@@ -53,7 +55,7 @@ class DynamicForm extends React.Component<Props> {
         return this.renderTextarea(input);
       }
       if (input.type === 'password') {
-        return this.renderSelect(input);
+        return this.renderPassword(input, form);
       }
       if (input.type === 'timepicker') {
         return this.renderTimePicker(input);
@@ -71,6 +73,10 @@ class DynamicForm extends React.Component<Props> {
         return this.renderRadioButtons(input, form);
       }
     });
+  }
+
+  renderPassword(input: FieldConfig, form: any) {
+    return <Password field={input} form={form} />;
   }
 
   renderReactSelect(input: FieldConfig, form: any) {
