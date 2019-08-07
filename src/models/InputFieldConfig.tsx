@@ -1,4 +1,5 @@
 import { placeholder } from '@babel/types';
+import { boolean } from 'yup';
 
 export interface FieldConfig {
   name: string;
@@ -23,7 +24,20 @@ export interface FieldConfig {
   label?: string;
   options?: Array<{ id?: any; value: any; label: string }>;
   class?: string;
-  validation?: {};
+  validation?: {
+    required?: {
+      message?: string;
+    };
+    min?: {
+      message?: string;
+      v: number;
+    };
+    max?: {
+      message?: string;
+      v: number;
+    };
+    pattern?: string;
+  };
 }
 
 export default FieldConfig;

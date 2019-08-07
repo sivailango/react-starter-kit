@@ -99,6 +99,14 @@ class App extends Component {
         .max(50, 'Too Long!')
         .required('Required'),
       start_date: Yup.string().required('Required'),
+      mobiles: Yup.array()
+        .min(2, 'Pick at least 3 tags')
+        .of(
+          Yup.object().shape({
+            label: Yup.string().required(),
+            value: Yup.string().required(),
+          })
+        ),
     });
 
     const commonProps = { myProp1: 'prop1', myProp2: 'prop2' };
