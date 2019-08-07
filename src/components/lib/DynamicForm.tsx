@@ -255,8 +255,13 @@ class DynamicForm extends React.Component<Props> {
               ));
               const selectOptions = [defaultOption, ...options];
               return (
-                <div className="dropdown">
-                  <select value={field.value} {...field} id={hasError}>
+                <div>
+                  <select
+                    className="form-control"
+                    value={field.value}
+                    {...field}
+                    id={hasError}
+                  >
                     {selectOptions}
                   </select>
                 </div>
