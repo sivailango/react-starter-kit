@@ -180,3 +180,12 @@ npm run analyze
 
 - https://jaredpalmer.com/formik/
 - https://github.com/styled-components/styled-components
+
+
+### TODO
+
+#### Input Components
+- [ ] Toogle
+- [ ] Date Range Picker
+- [ ] Text Mask
+- [ ] Pattern
