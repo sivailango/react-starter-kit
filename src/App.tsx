@@ -99,6 +99,13 @@ class App extends Component {
         name: 'password',
         value: '',
       },
+      {
+        id: 'is_enabled',
+        label: 'is_enabled',
+        type: 'toggle',
+        name: 'is_enabled',
+        value: '',
+      },
     ];
     const SignupSchema = Yup.object().shape({
       companyName: Yup.string()
@@ -114,6 +121,7 @@ class App extends Component {
             value: Yup.string().required(),
           })
         ),
+      password: Yup.string().required('Required'),
     });
 
     const commonProps = { myProp1: 'prop1', myProp2: 'prop2' };
