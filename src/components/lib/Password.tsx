@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Formik, Field, FieldArray } from 'formik';
 
-import VisibilitySharp from '@material-ui/icons/AccessAlarm';
+import Lock from '@material-ui/icons/Lock';
+import LockOpen from '@material-ui/icons/LockOpen';
 
 export interface IPasswordProps {}
 
@@ -27,12 +28,21 @@ export default class Password extends React.Component<any, State> {
   }
 
   public render() {
+    let lockIcon;
+
+    if (this.state.type === 'password') {
+      lockIcon = <Lock />;
+    } else {
+      lockIcon = <LockOpen />;
+    }
+
     return (
-      <div className="input-group mb-3" key={this.props.field.id}>
+      <div className="input-group" key={this.props.field.id}>
         <label>{this.props.field.label}</label>
         <input
           name={this.props.field.name}
           type={this.state.type}
+          onChange={this.props.form.handleChange}
           className={
             this.props.form.errors[this.props.field.name] &&
             this.props.form.touched[this.props.field.name]
@@ -42,9 +52,7 @@ export default class Password extends React.Component<any, State> {
         />
 
         <div className="input-group-append" onClick={this.show}>
-          <span className="input-group-text" id="basic-addon2">
-            <VisibilitySharp />
-          </span>
+          <span className="input-group-text">{lockIcon}</span>
         </div>
 
         {this.props.form.errors[this.props.field.name] &&

@@ -11,6 +11,7 @@ import Checkbox from './Checkbox';
 import CustomDatePicker from './DatePicker';
 import Password from './Password';
 import InputNumber from './InputNumber';
+import InputToggle from './InputToggle';
 
 import {
   Col,
@@ -77,6 +78,10 @@ class DynamicForm extends React.Component<Props> {
         // DONE
         return this.renderRadioButtons(input, form);
       }
+      if (input.type === 'toggle') {
+        // DONE
+        return this.renderToggle(input, form);
+      }
     });
   }
 
@@ -88,6 +93,9 @@ class DynamicForm extends React.Component<Props> {
     return <Password field={input} form={form} />;
   }
 
+  renderToggle(input: FieldConfig, form: any) {
+    return <InputToggle field={input} form={form} />;
+  }
   renderReactSelect(input: FieldConfig, form: any) {
     return (
       <ReactSelect
@@ -113,6 +121,7 @@ class DynamicForm extends React.Component<Props> {
             name={input.name}
             render={(props: any) => {
               const { field } = props;
+              console.log(props);
               return (
                 <input
                   {...field}
@@ -188,8 +197,6 @@ class DynamicForm extends React.Component<Props> {
       />
     );
   }
-
-  renderToggle(input: FieldConfig) {}
 
   renderRadioButtons(input: FieldConfig, form: any) {
     return (

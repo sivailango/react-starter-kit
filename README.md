@@ -181,11 +181,17 @@ npm run analyze
 - https://jaredpalmer.com/formik/
 - https://github.com/styled-components/styled-components
 
-
 ### TODO
 
 #### Input Components
-- [ ] Toogle
+
+- [x] Toogle
 - [ ] Date Range Picker
 - [ ] Text Mask
 - [ ] Pattern
+
+#### Theme
+
+- [ ] Dynamic For Style (Inline, Horizontal, etc.)
+- [ ] Sidebar
+- [ ] Theme Switcher
