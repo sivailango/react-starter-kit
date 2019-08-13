@@ -12,6 +12,7 @@
     "@types/react-dom": "16.8.5",
     "@types/react-redux": "7.1.1",
     "@types/react-select": "3.0.0",
+    "@types/react-text-mask": "^5.4.6",
     "@types/reactstrap": "8.0.1",
     "@types/redux-logger": "3.0.7",
     "@types/yup": "0.26.22",
@@ -38,6 +39,7 @@
     "redux-logger": "3.0.6",
     "redux-thunk": "2.3.0",
     "source-map-explorer": "2.0.1",
+    "text-mask-addons": "^3.8.0",
     "typescript": "3.5.3",
     "yup": "0.27.0"
   },

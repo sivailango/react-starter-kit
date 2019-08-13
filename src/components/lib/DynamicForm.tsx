@@ -10,6 +10,7 @@ import ReactSelect from './Select';
 import Checkbox from './Checkbox';
 import CustomDatePicker from './DatePicker';
 import Password from './Password';
+import InputNumber from './InputNumber';
 
 import {
   Col,
@@ -51,6 +52,10 @@ class DynamicForm extends React.Component<Props> {
         // DONE
         return this.renderCheckbox(input);
       }
+      if (input.type === 'number') {
+        // DONE
+        return this.renderInputNumber(input, form);
+      }
       if (input.type === 'textarea') {
         return this.renderTextarea(input);
       }
@@ -73,6 +78,10 @@ class DynamicForm extends React.Component<Props> {
         return this.renderRadioButtons(input, form);
       }
     });
+  }
+
+  renderInputNumber(input: FieldConfig, form: any) {
+    return <InputNumber field={input} form={form} />;
   }
 
   renderPassword(input: FieldConfig, form: any) {
