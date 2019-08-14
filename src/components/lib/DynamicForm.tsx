@@ -13,6 +13,8 @@ import Password from './Password';
 import InputNumber from './InputNumber';
 import InputToggle from './InputToggle';
 import InputDecimal from './InputDecimal';
+import InputText from './InputText';
+import InputEmail from './InputEmail';
 
 import {
   Col,
@@ -75,6 +77,10 @@ class DynamicForm extends React.Component<Props> {
         // DONE
         return this.renderTextbox(input, form);
       }
+      if (input.type === 'email') {
+        // DONE
+        return this.renderEmail(input, form);
+      }
       if (input.type === 'radio') {
         // DONE
         return this.renderRadioButtons(input, form);
@@ -123,34 +129,11 @@ class DynamicForm extends React.Component<Props> {
   }
 
   renderTextbox(input: FieldConfig, form: any) {
-    return (
-      <Fragment key={input.id}>
-        <label>{input.label}</label>
-        <div>
-          <Field
-            name={input.name}
-            render={(props: any) => {
-              const { field } = props;
-              console.log(props);
-              return (
-                <input
-                  {...field}
-                  type="text"
-                  className={
-                    form.errors[input.name] && form.touched[input.name]
-                      ? 'form-control is-invalid'
-                      : 'form-control'
-                  }
-                />
-              );
-            }}
-          />
-          {form.errors[input.name] && form.touched[input.name] && (
-            <div>{form.errors[input.name]}</div>
-          )}
-        </div>
-      </Fragment>
-    );
+    return <InputText field={input} form={form} />;
+  }
+
+  renderEmail(input: FieldConfig, form: any) {
+    return <InputEmail field={input} form={form} />;
   }
 
   renderCheckbox(item: any) {

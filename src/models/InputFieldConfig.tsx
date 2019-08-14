@@ -7,6 +7,7 @@ export interface FieldConfig {
   value?: any;
   type:
     | 'text'
+    | 'email'
     | 'textarea'
     | 'password'
     | 'datepicer'
@@ -38,7 +39,7 @@ export interface FieldConfig {
       message?: string;
       v: number;
     };
-    pattern?: string;
+    pattern?: RegExp;
   };
 }
 
