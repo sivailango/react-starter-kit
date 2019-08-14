@@ -112,6 +112,14 @@ class App extends Component {
         name: 'is_enabled',
         value: '',
       },
+      {
+        id: 'decimal',
+        label: 'Decimal Places',
+        type: 'decimal',
+        name: 'decimal',
+        value: '',
+        place: 4,
+      },
     ];
     const SignupSchema = Yup.object().shape({
       companyName: Yup.string()

@@ -12,6 +12,7 @@ import CustomDatePicker from './DatePicker';
 import Password from './Password';
 import InputNumber from './InputNumber';
 import InputToggle from './InputToggle';
+import InputDecimal from './InputDecimal';
 
 import {
   Col,
@@ -82,7 +83,16 @@ class DynamicForm extends React.Component<Props> {
         // DONE
         return this.renderToggle(input, form);
       }
+
+      if (input.type === 'decimal') {
+        // DONE
+        return this.renderDecimal(input, form);
+      }
     });
+  }
+
+  renderDecimal(input: FieldConfig, form: any) {
+    return <InputDecimal field={input} form={form} />;
   }
 
   renderInputNumber(input: FieldConfig, form: any) {

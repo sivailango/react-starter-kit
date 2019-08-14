@@ -19,9 +19,11 @@ export interface FieldConfig {
     | 'number'
     | 'checkbox_group'
     | 'radio'
-    | 'react_select';
+    | 'react_select'
+    | 'decimal';
   placeholder?: string;
   label?: string;
+  place?: number;
   options?: Array<{ id?: any; value: any; label: string }>;
   class?: string;
   validation?: {
