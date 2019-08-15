@@ -1,18 +1,32 @@
-import * as yup from 'yup';
+import * as Yup from 'yup';
 
-export function createYupSchema(schema, config) {
-  const { id, validationType, validations = [] } = config;
-  if (!yup[validationType]) {
+interface Yup {
+  [key: string]: any;
+}
+
+export default function createYupSchema(schema: any, config: any) {
+  let { id, type, validations = [] } = config;
+  // let validationType: any = type;
+
+  if (type === 'text') {
+    type = 'string';
+  }
+
+  if (!Yup[type]) {
     return schema;
   }
-  let validator = yup[validationType]();
-  validations.forEach(validation => {
+
+  let validator = Yup[type]();
+
+  validations.forEach((validation: any) => {
     const { params, type } = validation;
     if (!validator[type]) {
       return;
     }
     validator = validator[type](...params);
   });
+
   schema[id] = validator;
+
   return schema;
 }

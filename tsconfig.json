@@ -15,7 +15,9 @@
     "noEmit": true,
     "jsx": "preserve",
     "baseUrl": "src",
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "suppressImplicitAnyIndexErrors": true
   },
-  "include": ["src/*"]
+  "include": ["src/*"],
+  "exclude": []
 }

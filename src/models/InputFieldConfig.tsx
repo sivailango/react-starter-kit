@@ -23,10 +23,23 @@ export interface FieldConfig {
     | 'react_select'
     | 'decimal';
   placeholder?: string;
+  validationType?: any;
   label?: string;
   place?: number;
   options?: Array<{ id?: any; value: any; label: string }>;
   class?: string;
+  validations?: Array<{
+    type:
+      | 'required'
+      | 'string'
+      | 'min'
+      | 'max'
+      | 'email'
+      | 'url'
+      | 'matches'
+      | 'number';
+    params: Array<any>;
+  }>;
   validation?: {
     required?: {
       message?: string;

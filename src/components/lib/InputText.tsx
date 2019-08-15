@@ -17,20 +17,18 @@ export default class InputText extends Component<InputProps, any> {
 
   handleChange(e: any) {
     console.log(
-      this.props.field.validation.pattern,
+      // this.props.field.validation.pattern,
       this.props.form.values[this.props.field.name],
       e.target.value
     );
 
     this.props.form.setFieldValue(this.props.field.name, e.target.value);
 
+    /*
     if (!new RegExp(this.props.field.validation.pattern).test(e.target.value)) {
-      /*
-      this.props.form.errors[this.props.field.name] = 'Invalid Email';
-      this.props.form.touched[this.props.field.name] = true;
-      */
       e.preventDefault();
     }
+    */
   }
 
   render() {

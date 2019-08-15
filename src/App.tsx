@@ -20,6 +20,8 @@ import DynamicForm from './components/lib/DynamicForm';
 
 import FieldConfig from './models/InputFieldConfig';
 
+import createYupSchema from './utils/YupSchemaGenerator';
+
 class App extends Component {
   handleSubmit(values: any) {
     console.log(values);
@@ -32,6 +34,12 @@ class App extends Component {
         type: 'text',
         name: 'companyName',
         value: '',
+        validations: [
+          {
+            type: 'required',
+            params: ['This field is required'],
+          },
+        ],
       },
       {
         id: 'country',
@@ -126,8 +134,24 @@ class App extends Component {
         type: 'email',
         name: 'email',
         value: '',
+        validations: [
+          {
+            type: 'required',
+            params: ['This field is required'],
+          },
+          {
+            type: 'email',
+            params: ['Invalid Email format'],
+          },
+        ],
       },
     ];
+
+    const yepSchema = fields.reduce(createYupSchema, {});
+    console.log(yepSchema);
+    const validateSchema = Yup.object().shape(yepSchema);
+
+    /*
     const SignupSchema = Yup.object().shape({
       companyName: Yup.string()
         .min(2, 'Too Short!')
@@ -144,6 +168,7 @@ class App extends Component {
         ),
       password: Yup.string().required('Required'),
     });
+    */
 
     const commonProps = { myProp1: 'prop1', myProp2: 'prop2' };
     return (
@@ -160,7 +185,7 @@ class App extends Component {
           <Footer />
           */}
 
-          <DynamicForm fields={fields} validation={SignupSchema} />
+          <DynamicForm fields={fields} validation={validateSchema} />
         </div>
       </div>
     );
