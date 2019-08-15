@@ -31,6 +31,7 @@ interface Props {
   fields: Array<FieldConfig>;
   errors?: Array<any>;
   validation?: any;
+  onFormSubmit: Function;
 }
 
 class DynamicForm extends React.Component<Props> {
@@ -64,6 +65,7 @@ class DynamicForm extends React.Component<Props> {
         return this.renderTextarea(input);
       }
       if (input.type === 'password') {
+        // DONE
         return this.renderPassword(input, form);
       }
       if (input.type === 'timepicker') {
@@ -307,7 +309,7 @@ class DynamicForm extends React.Component<Props> {
     return (
       <Formik
         onSubmit={values => {
-          console.log(values);
+          this.props.onFormSubmit(values);
         }}
         validationSchema={this.props.validation}
         initialValues={initialValues}

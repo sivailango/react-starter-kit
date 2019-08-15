@@ -4,24 +4,22 @@ import { Formik, Field, FieldArray } from 'formik';
 
 import InputProps from './../../models/InputProps';
 
-interface Props {}
-interface State {}
-
 export default class InputText extends Component<InputProps, any> {
   state = {};
 
   constructor(props: any) {
     super(props);
+    this.checkDisabled();
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(e: any) {
-    console.log(
-      // this.props.field.validation.pattern,
-      this.props.form.values[this.props.field.name],
-      e.target.value
-    );
+  checkDisabled() {
+    if (!this.props.field.disabled) {
+      this.props.field.disabled = false;
+    }
+  }
 
+  handleChange(e: any) {
     this.props.form.setFieldValue(this.props.field.name, e.target.value);
 
     /*
@@ -40,11 +38,10 @@ export default class InputText extends Component<InputProps, any> {
             name={this.props.field.name}
             render={(props: any) => {
               const { field } = props;
-              // console.log(props);
               return (
                 <input
                   {...field}
-                  onChange={this.handleChange}
+                  onChange={this.props.form.handleChange}
                   type="text"
                   className={
                     this.props.form.errors[this.props.field.name] &&

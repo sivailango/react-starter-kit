@@ -6,7 +6,6 @@ class Checkbox extends React.Component<any, any> {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <input

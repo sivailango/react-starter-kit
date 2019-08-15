@@ -1,14 +1,12 @@
 import * as Yup from 'yup';
 
-interface Yup {
-  [key: string]: any;
-}
-
 export default function createYupSchema(schema: any, config: any) {
   let { id, type, validations = [] } = config;
   // let validationType: any = type;
 
-  if (type === 'text') {
+  const inputTypes = ['text', 'email'];
+
+  if (inputTypes.includes(type)) {
     type = 'string';
   }
 

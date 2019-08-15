@@ -26,6 +26,16 @@ class App extends Component {
   handleSubmit(values: any) {
     console.log(values);
   }
+
+  onChangeTest() {
+    console.log('On Change');
+    // this.props.form.setFieldValue(this.props.field.name, e.target.value);
+  }
+
+  onFormSubmit(values: any) {
+    console.log(values);
+  }
+
   render() {
     const fields: Array<FieldConfig> = [
       {
@@ -33,6 +43,7 @@ class App extends Component {
         label: 'First Name',
         type: 'text',
         name: 'companyName',
+        // onChange: this.onChangeTest,
         value: '',
         validations: [
           {
@@ -148,29 +159,8 @@ class App extends Component {
     ];
 
     const yepSchema = fields.reduce(createYupSchema, {});
-    console.log(yepSchema);
     const validateSchema = Yup.object().shape(yepSchema);
 
-    /*
-    const SignupSchema = Yup.object().shape({
-      companyName: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
-      start_date: Yup.string().required('Required'),
-      mobiles: Yup.array()
-        .min(2, 'Pick at least 3 tags')
-        .of(
-          Yup.object().shape({
-            label: Yup.string().required(),
-            value: Yup.string().required(),
-          })
-        ),
-      password: Yup.string().required('Required'),
-    });
-    */
-
-    const commonProps = { myProp1: 'prop1', myProp2: 'prop2' };
     return (
       <div>
         {/*
@@ -185,7 +175,11 @@ class App extends Component {
           <Footer />
           */}
 
-          <DynamicForm fields={fields} validation={validateSchema} />
+          <DynamicForm
+            fields={fields}
+            validation={validateSchema}
+            onFormSubmit={this.onFormSubmit}
+          />
         </div>
       </div>
     );

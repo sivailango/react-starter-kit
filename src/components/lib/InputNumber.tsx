@@ -10,7 +10,7 @@ const numberMask = createNumberMask({
   suffix: ' $',
 });
 
-export default class App extends React.Component<any> {
+export default class InputNumber extends React.Component<any> {
   constructor(props: any) {
     super(props);
   }
@@ -19,9 +19,10 @@ export default class App extends React.Component<any> {
       <div>
         <MaskedInput
           mask={numberMask}
-          id="phone"
-          placeholder="Enter your phone number"
+          id={this.props.field.id}
+          placeholder={this.props.field.placeholder}
           type="text"
+          className="form-control"
         />
       </div>
     );

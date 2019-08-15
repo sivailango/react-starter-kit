@@ -43,6 +43,7 @@ export default class Password extends React.Component<any, State> {
           name={this.props.field.name}
           type={this.state.type}
           onChange={this.props.form.handleChange}
+          disabled={this.props.field.disabled}
           className={
             this.props.form.errors[this.props.field.name] &&
             this.props.form.touched[this.props.field.name]
