@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Formik, Field } from 'formik';
+
+import { Formik, Field, FieldArray } from 'formik';
+
 import Yup from 'yup';
 import Checkbox from './Checkbox';
 
@@ -28,44 +30,41 @@ class CheckboxGroup extends React.Component<any, any> {
   };
 
   render() {
-    const { value, error, touched, label, className, children } = this.props;
-
-    /*
-    const classes = classNames(
-      'input-field',
-      {
-        'is-success': value || (!error && touched), // handle prefilled or user-filled
-        'is-error': !!error && touched,
-      },
-      className
-    );
-    */
-    /*
-    {
-      React.Children.map(children, child => {
-        console.log(child);
-      });
-    }
-    */
-
     return (
       <div>
-        <fieldset>
-          <legend>{label}</legend>
-          {/*}
-          {this.props.options.map((o: any) => {
-            return o;
-          })}*/}
-          {React.Children.map(children, child => {
-            return React.cloneElement(child as React.ReactElement<any>, {
-              field: {
-                value: 'tamil',
-                onChange: this.handleChange,
-                onBlur: this.handleBlur,
-              },
-            });
-          })}
-        </fieldset>
+        <label htmlFor={this.props.field.id}>{this.props.field.label}</label>
+        <FieldArray
+          name={this.props.field.name}
+          render={arrayHelpers => (
+            <div>
+              {this.props.field.options!.map(o => (
+                <div key={o.id}>
+                  <label>
+                    <input
+                      name={this.props.field.name}
+                      type="checkbox"
+                      value={o.id}
+                      checked={this.props.form.values[
+                        this.props.field.name
+                      ].includes(o.id)}
+                      onChange={e => {
+                        if (e.target.checked) {
+                          arrayHelpers.push(o.id);
+                        } else {
+                          const idx = this.props.form.values[
+                            this.props.field.name
+                          ].indexOf(o.id);
+                          arrayHelpers.remove(idx);
+                        }
+                      }}
+                    />{' '}
+                    {o.label}
+                  </label>
+                </div>
+              ))}
+            </div>
+          )}
+        />
       </div>
     );
   }

@@ -17,7 +17,7 @@ class Checkbox extends React.Component<any, any> {
           onChange={this.props.form.handleChange}
           onBlur={this.props.form.handleBlur}
         />
-        <label htmlFor={this.props.field.id}>{this.props.label}</label>
+        <label htmlFor={this.props.field.id}>{this.props.field.label}</label>
       </div>
     );
   }

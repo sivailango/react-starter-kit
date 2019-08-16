@@ -55,7 +55,7 @@ class DynamicForm extends React.Component<Props> {
       }
       if (input.type === 'checkbox') {
         // DONE
-        return this.renderCheckbox(input);
+        return this.renderCheckbox(input, form);
       }
       if (input.type === 'number') {
         // DONE
@@ -114,6 +114,7 @@ class DynamicForm extends React.Component<Props> {
   renderToggle(input: FieldConfig, form: any) {
     return <InputToggle field={input} form={form} />;
   }
+
   renderReactSelect(input: FieldConfig, form: any) {
     return (
       <ReactSelect
@@ -138,7 +139,9 @@ class DynamicForm extends React.Component<Props> {
     return <InputEmail field={input} form={form} />;
   }
 
-  renderCheckbox(item: any) {
+  renderCheckbox(input: FieldConfig, form: any) {
+    return <Checkbox field={input} form={form} />;
+    /*
     return (
       <FormGroup check key={item.id}>
         <Label check>
@@ -151,6 +154,7 @@ class DynamicForm extends React.Component<Props> {
         </Label>
       </FormGroup>
     );
+    */
   }
 
   renderCheckboxes(input: FieldConfig, form: any) {
@@ -162,61 +166,72 @@ class DynamicForm extends React.Component<Props> {
     console.log(cb);
     */
 
+    const divStyle = {
+      display: 'inline-block',
+    };
+
     return (
-      <FieldArray
-        name={input.name}
-        render={arrayHelpers => (
-          <div>
-            {input.options!.map(o => (
-              <div key={o.id}>
-                <label>
-                  <input
-                    name={input.name}
-                    type="checkbox"
-                    value={o.id}
-                    checked={form.values[input.name].includes(o.id)}
-                    onChange={e => {
-                      if (e.target.checked) arrayHelpers.push(o.id);
-                      else {
-                        const idx = form.values[input.name].indexOf(o.id);
-                        arrayHelpers.remove(idx);
-                      }
-                    }}
-                  />{' '}
-                  {o.label}
-                </label>
-              </div>
-            ))}
-          </div>
-        )}
-      />
+      <div>
+        <label htmlFor={input.id}>{input.label}</label>
+        <FieldArray
+          name={input.name}
+          render={arrayHelpers => (
+            <div>
+              {input.options!.map(o => (
+                <div key={o.id} style={divStyle}>
+                  <label>
+                    <input
+                      name={input.name}
+                      type="checkbox"
+                      value={o.id}
+                      checked={form.values[input.name].includes(o.id)}
+                      onChange={e => {
+                        if (e.target.checked) {
+                          arrayHelpers.push(o.id);
+                        } else {
+                          const idx = form.values[input.name].indexOf(o.id);
+                          arrayHelpers.remove(idx);
+                        }
+                      }}
+                    />{' '}
+                    {o.label}
+                  </label>
+                </div>
+              ))}
+            </div>
+          )}
+        />
+      </div>
     );
   }
 
   renderRadioButtons(input: FieldConfig, form: any) {
     return (
-      <FieldArray
-        name={input.name}
-        render={arrayHelpers => (
-          <div>
-            {input.options!.map(o => (
-              <div key={o.id}>
-                <label>
-                  <input
-                    name={input.name}
-                    id={o.id}
-                    type="radio"
-                    value={o.id}
-                    checked={form.values[input.name].includes(o.id)}
-                    onChange={form.handleChange}
-                  />
-                  {o.label}
-                </label>
-              </div>
-            ))}
-          </div>
-        )}
-      />
+      <div>
+        <label htmlFor={input.id}>{input.label}</label>
+        <FieldArray
+          name={input.name}
+          render={arrayHelpers => (
+            <div>
+              {input.options!.map(o => (
+                <div key={o.id}>
+                  <label>
+                    <input
+                      name={input.name}
+                      id={o.id}
+                      type="radio"
+                      value={o.id}
+                      checked={form.values[input.name].includes(o.id)}
+                      onChange={form.handleChange}
+                    />
+                    {o.label}
+                  </label>
+                </div>
+              ))}
+            </div>
+          )}
+        />
+      </div>
     );
   }
 
@@ -334,7 +349,7 @@ class DynamicForm extends React.Component<Props> {
                   </form>
                 </div>
               </Col>
-              <Col sm={{ size: 6 }}>
+              <Col sm={{ size: 4 }}>
                 <DisplayFormikState {...form} />
               </Col>
             </Row>

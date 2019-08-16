@@ -31,34 +31,32 @@ export default class InputText extends Component<InputProps, any> {
 
   render() {
     return (
-      <Fragment key={this.props.field.id}>
+      <div key={this.props.field.id}>
         <label>{this.props.field.label}</label>
-        <div>
-          <Field
-            name={this.props.field.name}
-            render={(props: any) => {
-              const { field } = props;
-              return (
-                <input
-                  {...field}
-                  onChange={this.props.form.handleChange}
-                  type="text"
-                  className={
-                    this.props.form.errors[this.props.field.name] &&
-                    this.props.form.touched[this.props.field.name]
-                      ? 'form-control is-invalid'
-                      : 'form-control'
-                  }
-                />
-              );
-            }}
-          />
-          {this.props.form.errors[this.props.field.name] &&
-            this.props.form.touched[this.props.field.name] && (
-              <div>{this.props.form.errors[this.props.field.name]}</div>
-            )}
-        </div>
-      </Fragment>
+        <Field
+          name={this.props.field.name}
+          render={(props: any) => {
+            const { field } = props;
+            return (
+              <input
+                {...field}
+                onChange={this.props.form.handleChange}
+                type="text"
+                className={
+                  this.props.form.errors[this.props.field.name] &&
+                  this.props.form.touched[this.props.field.name]
+                    ? 'form-control is-invalid'
+                    : 'form-control'
+                }
+              />
+            );
+          }}
+        />
+        {this.props.form.errors[this.props.field.name] &&
+          this.props.form.touched[this.props.field.name] && (
+            <div>{this.props.form.errors[this.props.field.name]}</div>
+          )}
+      </div>
     );
   }
 }

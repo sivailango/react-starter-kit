@@ -1,8 +1,16 @@
 export interface FieldConfig {
+  classNames?: string;
   disabled?: boolean;
-  name: string;
   id: string;
-  value?: any;
+  label?: string;
+  name: string;
+  place?: number;
+  placeholder?: string;
+  position?: 'grid' | 'inline' | 'vertical';
+  positionGrid?: number;
+  onChange?: Function;
+  options?: Array<{ id?: any; value: any; label: string }>;
+  title?: string;
   type:
     | 'text'
     | 'email'
@@ -20,13 +28,6 @@ export interface FieldConfig {
     | 'radio'
     | 'react_select'
     | 'decimal';
-  placeholder?: string;
-  validationType?: any;
-  label?: string;
-  place?: number;
-  options?: Array<{ id?: any; value: any; label: string }>;
-  classNames?: string;
-  onChange?: Function;
   validations?: Array<{
     type:
       | 'required'
@@ -53,6 +54,8 @@ export interface FieldConfig {
     };
     pattern?: RegExp;
   };
+  validationType?: any;
+  value?: any;
 }
 
 export default FieldConfig;

@@ -37,25 +37,26 @@ export default class Password extends React.Component<any, State> {
     }
 
     return (
-      <div className="input-group" key={this.props.field.id}>
+      <div>
         <label>{this.props.field.label}</label>
-        <input
-          name={this.props.field.name}
-          type={this.state.type}
-          onChange={this.props.form.handleChange}
-          disabled={this.props.field.disabled}
-          className={
-            this.props.form.errors[this.props.field.name] &&
-            this.props.form.touched[this.props.field.name]
-              ? 'form-control is-invalid'
-              : 'form-control'
-          }
-        />
+        <div className="input-group" key={this.props.field.id}>
+          <input
+            name={this.props.field.name}
+            type={this.state.type}
+            onChange={this.props.form.handleChange}
+            disabled={this.props.field.disabled}
+            className={
+              this.props.form.errors[this.props.field.name] &&
+              this.props.form.touched[this.props.field.name]
+                ? 'form-control is-invalid'
+                : 'form-control'
+            }
+          />
 
-        <div className="input-group-append" onClick={this.show}>
-          <span className="input-group-text">{lockIcon}</span>
+          <div className="input-group-append" onClick={this.show}>
+            <span className="input-group-text">{lockIcon}</span>
+          </div>
         </div>
-
         {this.props.form.errors[this.props.field.name] &&
           this.props.form.touched[this.props.field.name] && (
             <div>{this.props.form.errors[this.props.field.name]}</div>

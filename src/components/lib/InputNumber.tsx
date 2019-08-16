@@ -3,11 +3,13 @@ import MaskedInput from 'react-text-mask';
 
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
-export interface IAppProps {}
+interface IAppProps {}
 
 const numberMask = createNumberMask({
   prefix: '',
-  suffix: ' $',
+  suffix: '',
+  includeThousandsSeparator: false,
+  allowDecimal: true,
 });
 
 export default class InputNumber extends React.Component<any> {
@@ -17,6 +19,7 @@ export default class InputNumber extends React.Component<any> {
   public render() {
     return (
       <div>
+        <label htmlFor={this.props.field.id}>{this.props.field.label}</label>
         <MaskedInput
           mask={numberMask}
           id={this.props.field.id}
