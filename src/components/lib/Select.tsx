@@ -18,7 +18,7 @@ class ReactSelect extends React.Component<any> {
 
   render() {
     return (
-      <div>
+      <div className="form-group">
         <label htmlFor="color">{this.props.fieldConfig.label}</label>
         <Select
           id={this.props.fieldConfig.id}
@@ -36,6 +36,10 @@ class ReactSelect extends React.Component<any> {
           components={{
             IndicatorSeparator: () => null,
           }}
+          theme={theme => ({
+            ...theme,
+            borderRadius: 0,
+          })}
         />
       </div>
     );

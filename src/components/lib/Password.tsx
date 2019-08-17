@@ -37,7 +37,7 @@ export default class Password extends React.Component<any, State> {
     }
 
     return (
-      <div>
+      <div className="form-group">
         <label>{this.props.field.label}</label>
         <div className="input-group" key={this.props.field.id}>
           <input

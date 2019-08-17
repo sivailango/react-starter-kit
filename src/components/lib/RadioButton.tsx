@@ -31,7 +31,7 @@ class RadioButton extends React.Component<InputProps, State> {
   render() {
     console.log(this.props);
     return (
-      <div>
+      <div className="form-group">
         <label htmlFor={this.props.field.id}>{this.props.field.label}</label>
         <FieldArray
           name={this.props.field.name}

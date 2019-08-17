@@ -1,9 +1,9 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Lato', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 14px !important;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -12,8 +12,32 @@ code {
 /*
 Contents
 ========
+0. Override Bootstrap
 1. Page layout
+2. Typography
+3. Form
+4. Table
 */
+
+/* ====== 0. Override Bootstrap ===== */
+.form-control {
+  font-size: 14px !important;
+}
+.form-control,
+.input-group-text,
+select {
+  border-radius: 0 !important;
+}
+.form-control.is-invalid:focus,
+.form-control:focus,
+.was-validated .form-control:invalid:focus {
+  box-shadow: none !important;
+}
+.required {
+  color: red;
+  font-weight: 600;
+}
+/* ====== 0. End of Override Bootstrap ===== */
 
 /* ====== 1. Page Content ===== */
 #sidebar {
@@ -48,6 +72,14 @@ Contents
   display: block;
 }
 /* ====== 1. End of Page Content ===== */
+
+/* ====== 1. Typography ===== */
+.small,
+small {
+  font-size: 90% !important;
+}
+/* ====== 1. End of Typography ===== */
+
 .logo {
   display: block;
   line-height: 80px;

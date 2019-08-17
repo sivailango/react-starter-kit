@@ -176,6 +176,8 @@ npm run analyze
 - https://prettier.io/
 - https://github.com/typicode/husky
 - https://codesandbox.io/s/clever-snyder-1u410?fontsize=14
+- https://codesandbox.io/s/x77o7v4kxz?from-embed
+- https://codesandbox.io/s/ookp34xl89?from-embed
 
 ### Useful NPM Modules
 

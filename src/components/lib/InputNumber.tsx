@@ -18,7 +18,7 @@ export default class InputNumber extends React.Component<any> {
   }
   public render() {
     return (
-      <div>
+      <div className="form-group">
         <label htmlFor={this.props.field.id}>{this.props.field.label}</label>
         <MaskedInput
           mask={numberMask}

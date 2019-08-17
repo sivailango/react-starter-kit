@@ -7,7 +7,7 @@ class Checkbox extends React.Component<any, any> {
 
   render() {
     return (
-      <div>
+      <div className="form-group">
         <input
           name={this.props.field.name}
           id={this.props.field.id}

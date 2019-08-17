@@ -168,15 +168,7 @@ class DynamicForm extends React.Component<Props> {
   }
 
   renderDatePicker(input: FieldConfig, form: any) {
-    return (
-      <CustomDatePicker
-        name={input.name}
-        field={input}
-        value={form.values[input.name]}
-        onChange={form.setFieldValue}
-        form={form}
-      />
-    );
+    return <CustomDatePicker field={input} form={form} />;
   }
 
   renderFile(input: FieldConfig) {}
@@ -186,56 +178,45 @@ class DynamicForm extends React.Component<Props> {
   renderTimePicker(input: FieldConfig) {}
 
   renderDataTimePicker(input: FieldConfig, form: any) {
-    return (
-      <CustomDatePicker
-        name={input.name}
-        value={form.values[input.name]}
-        onChange={form.setFieldValue}
-        form={form}
-      />
-    );
+    return <CustomDatePicker field={input} form={form} />;
   }
 
   renderSelect(input: FieldConfig) {
     return (
-      <Fragment key={input.name}>
+      <div key={input.id} className="form-group">
         <label>{input.label}</label>
-        <div>
-          <Field
-            name={input.name}
-            render={(props: any) => {
-              const { field } = props;
-              const { errors, touched } = props.form;
-              const hasError =
-                errors[input.name] && touched[input.name] ? 'hasError' : '';
-              const defaultOption = (
-                <option key="default" value="Please Select">
-                  Please Select
-                </option>
-              );
-              const options = input.options!.map(i => (
-                <option key={i.value} value={i.label}>
-                  {' '}
-                  {i.label}{' '}
-                </option>
-              ));
-              const selectOptions = [defaultOption, ...options];
-              return (
-                <div>
-                  <select
-                    className="form-control"
-                    value={field.value}
-                    {...field}
-                    id={hasError}
-                  >
-                    {selectOptions}
-                  </select>
-                </div>
-              );
-            }}
-          />
-        </div>
-      </Fragment>
+        <Field
+          name={input.name}
+          render={(props: any) => {
+            const { field } = props;
+            const { errors, touched } = props.form;
+            const hasError =
+              errors[input.name] && touched[input.name] ? 'hasError' : '';
+            const defaultOption = (
+              <option key="default" value="Please Select">
+                Please Select
+              </option>
+            );
+            const options = input.options!.map(i => (
+              <option key={i.value} value={i.label}>
+                {' '}
+                {i.label}{' '}
+              </option>
+            ));
+            const selectOptions = [defaultOption, ...options];
+            return (
+              <select
+                className="form-control"
+                value={field.value}
+                {...field}
+                id={hasError}
+              >
+                {selectOptions}
+              </select>
+            );
+          }}
+        />
+      </div>
     );
   }
 
@@ -270,12 +251,12 @@ class DynamicForm extends React.Component<Props> {
                     {this.renderFields(this.props.fields, form)}
                     <button
                       type="reset"
-                      className="btn"
+                      className="btn btn-secondary"
                       onClick={form.handleReset}
                     >
                       Reset
                     </button>
-                    <button type="submit" className="btn">
+                    <button type="submit" className="btn btn-primary">
                       Submit
                     </button>
                   </form>

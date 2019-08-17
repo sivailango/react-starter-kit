@@ -2,20 +2,41 @@ import React, { Component, Fragment } from 'react';
 
 import { Formik, Field, FieldArray } from 'formik';
 
+import InputHint from './forms/InputHint';
+import RequiredField from './forms/RequiredField';
+
 import InputProps from './../../models/InputProps';
 
 export default class InputText extends Component<InputProps, any> {
-  state = {};
+  state = {
+    isRequired: false,
+  };
 
-  constructor(props: any) {
+  constructor(props: InputProps) {
     super(props);
     this.checkDisabled();
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidMount() {
+    this.checkRequired();
+  }
+
   checkDisabled() {
     if (!this.props.field.disabled) {
       this.props.field.disabled = false;
+    }
+  }
+
+  checkRequired() {
+    if (this.props.field.validations) {
+      const o = this.props.field.validations.filter(v => v.type === 'required');
+
+      if (o) {
+        this.setState({
+          isRequired: true,
+        });
+      }
     }
   }
 
@@ -31,8 +52,10 @@ export default class InputText extends Component<InputProps, any> {
 
   render() {
     return (
-      <div key={this.props.field.id}>
-        <label>{this.props.field.label}</label>
+      <div className="form-group" key={this.props.field.id}>
+        <label>
+          {this.props.field.label} {this.state.isRequired && <RequiredField />}
+        </label>
         <Field
           name={this.props.field.name}
           render={(props: any) => {
@@ -54,7 +77,9 @@ export default class InputText extends Component<InputProps, any> {
         />
         {this.props.form.errors[this.props.field.name] &&
           this.props.form.touched[this.props.field.name] && (
-            <div>{this.props.form.errors[this.props.field.name]}</div>
+            <InputHint
+              message={this.props.form.errors[this.props.field.name]}
+            />
           )}
       </div>
     );

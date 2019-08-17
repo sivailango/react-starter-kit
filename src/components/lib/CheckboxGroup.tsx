@@ -9,6 +9,8 @@ import classNames from 'classnames';
 
 import Checkbox from './Checkbox';
 
+import RequiredField from './forms/RequiredField';
+
 import InputProps from './../../models/InputProps';
 import InputOption from './../../models/InputOption';
 
@@ -17,6 +19,7 @@ interface State {
   grid?: string;
   containerClass?: string;
   groupClass?: string;
+  isRequired?: boolean;
 }
 
 class CheckboxGroup extends React.Component<InputProps, State> {
@@ -27,8 +30,21 @@ class CheckboxGroup extends React.Component<InputProps, State> {
     };
   }
 
+  checkRequired() {
+    if (this.props.field.validations) {
+      const o = this.props.field.validations.filter(v => v.type === 'required');
+
+      if (o) {
+        this.setState({
+          isRequired: true,
+        });
+      }
+    }
+  }
+
   componentDidMount() {
     this.setPosition();
+    this.checkRequired();
   }
 
   setPosition() {
@@ -71,8 +87,10 @@ class CheckboxGroup extends React.Component<InputProps, State> {
 
   render() {
     return (
-      <div>
-        <label htmlFor={this.props.field.id}>{this.props.field.label}</label>
+      <div className="form-group">
+        <label htmlFor={this.props.field.id}>
+          {this.props.field.label} {this.state.isRequired && <RequiredField />}
+        </label>
         <FieldArray
           name={this.props.field.name}
           render={arrayHelpers => (

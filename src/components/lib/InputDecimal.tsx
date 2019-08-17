@@ -28,7 +28,7 @@ class InputDecimal extends React.Component<any, any> {
 
   render() {
     return (
-      <div>
+      <div className="form-group">
         <label htmlFor={this.props.field.name}>{this.props.field.label}</label>
         <input
           type="text"

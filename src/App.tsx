@@ -75,6 +75,12 @@ class App extends Component {
         type: 'datepicker',
         name: 'dob',
         value: '',
+        validations: [
+          {
+            type: 'required',
+            params: ['This field is required'],
+          },
+        ],
       },
       {
         id: 'password',
