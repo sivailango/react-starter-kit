@@ -9,6 +9,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/*
+Contents
+========
+1. Page layout
+*/
+
+/* ====== 1. Page Content ===== */
 #sidebar {
   position: fixed;
   top: 0;
@@ -40,6 +47,7 @@ code {
   color: #98a6ad;
   display: block;
 }
+/* ====== 1. End of Page Content ===== */
 .logo {
   display: block;
   line-height: 80px;
@@ -85,4 +93,16 @@ a.sidebar-nav-link i {
 .react-datepicker-wrapper,
 .react-datepicker__input-container {
   display: block !important;
+}
+.rb.inline,
+.cb.inline {
+  display: inline;
+}
+.rb.vertical,
+.cb.vertical {
+  display: block;
+}
+input[type='checkbox'],
+input[type='radio'] {
+  margin-right: 4px;
 }

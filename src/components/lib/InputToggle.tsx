@@ -10,7 +10,7 @@ export default class InputToggle extends React.Component<any> {
   public render() {
     return (
       <FormGroup>
-        <Label for={this.props.field.id}>{this.props.field.title}</Label>
+        <Label>{this.props.field.title}</Label>
         <div>
           <CustomInput
             type="switch"

@@ -124,11 +124,19 @@ class App extends Component {
         label: 'Languages Known?',
         type: 'checkbox_group',
         name: 'languages_known',
-        position: 'inline',
+        position: 'grid',
+        positionGrid: 4,
         value: [],
         options: [
-          { id: 'en', value: 'en', label: 'English' },
+          { id: 'en', value: 'en', label: 'English', disabled: true },
           { id: 'tamil', value: 'tamil', label: 'Tamil' },
+          { id: 'telugu', value: 'telugu', label: 'Telugu' },
+        ],
+        validations: [
+          {
+            type: 'required',
+            params: ['This field is required'],
+          },
         ],
       },
       {
@@ -137,9 +145,16 @@ class App extends Component {
         type: 'radio',
         name: 'current_country',
         value: '',
+        position: 'vertical',
         options: [
           { id: 'india', value: 'india', label: 'India' },
           { id: 'us', value: 'us', label: 'US' },
+        ],
+        validations: [
+          {
+            type: 'required',
+            params: ['This field is required'],
+          },
         ],
       },
       {

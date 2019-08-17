@@ -1,3 +1,5 @@
+import InputOption from './InputOption';
+
 export interface FieldConfig {
   classNames?: string;
   disabled?: boolean;
@@ -9,7 +11,7 @@ export interface FieldConfig {
   position?: 'grid' | 'inline' | 'vertical';
   positionGrid?: number;
   onChange?: Function;
-  options?: Array<{ id?: any; value: any; label: string }>;
+  options?: Array<InputOption>;
   title?: string;
   type:
     | 'text'

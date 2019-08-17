@@ -1,24 +1,66 @@
 import React from 'react';
-class RadioButton extends React.Component<any, any> {
+import { FieldArray } from 'formik';
+
+import InputProps from './../../models/InputProps';
+import InputOption from './../../models/InputOption';
+
+interface State {
+  position: string;
+}
+
+class RadioButton extends React.Component<InputProps, State> {
   constructor(props: any) {
     super(props);
+
+    this.state = {
+      position: 'inline',
+    };
   }
 
+  componentDidMount() {
+    this.setPosition();
+  }
+
+  setPosition() {
+    if (this.props.field.position) {
+      this.setState({
+        position: this.props.field.position,
+      });
+    }
+  }
   render() {
     console.log(this.props);
     return (
       <div>
-        <input
+        <label htmlFor={this.props.field.id}>{this.props.field.label}</label>
+        <FieldArray
           name={this.props.field.name}
-          id={this.props.field.id}
-          type="radio"
-          value={this.props.form.id}
-          checked={this.props.form.id === this.props.form.id}
-          onChange={this.props.form.handleChange}
-          onBlur={this.props.form.handleBlur}
-          {...this.props}
+          render={arrayHelpers => (
+            <div>
+              {this.props.field.options!.map((o: InputOption) => (
+                <div key={o.id} className={`rb ${this.state.position}`}>
+                  <label>
+                    <input
+                      name={this.props.field.name}
+                      id={o.id}
+                      type="radio"
+                      value={o.id}
+                      checked={this.props.form.values[
+                        this.props.field.name
+                      ].includes(o.id)}
+                      onChange={this.props.form.handleChange}
+                    />
+                    {o.label}
+                  </label>
+                </div>
+              ))}
+              {this.props.form.errors[this.props.field.name] &&
+                this.props.form.touched[this.props.field.name] && (
+                  <div>{this.props.form.errors[this.props.field.name]}</div>
+                )}
+            </div>
+          )}
         />
-        <label htmlFor={this.props.field.id}>{this.props.label}</label>
       </div>
     );
   }

@@ -26,6 +26,7 @@ export default class InputNumber extends React.Component<any> {
           placeholder={this.props.field.placeholder}
           type="text"
           className="form-control"
+          onChange={this.props.form.handleChange}
         />
       </div>
     );

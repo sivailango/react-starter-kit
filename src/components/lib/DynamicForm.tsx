@@ -15,6 +15,8 @@ import InputToggle from './InputToggle';
 import InputDecimal from './InputDecimal';
 import InputText from './InputText';
 import InputEmail from './InputEmail';
+import CheckboxGroup from './CheckboxGroup';
+import RadioButton from './RadioButton';
 
 import {
   Col,
@@ -158,81 +160,11 @@ class DynamicForm extends React.Component<Props> {
   }
 
   renderCheckboxes(input: FieldConfig, form: any) {
-    /*
-    const cb = input.options!.map(o => {
-      return this.renderCheckbox(o);
-    });
-
-    console.log(cb);
-    */
-
-    const divStyle = {
-      display: 'inline-block',
-    };
-
-    return (
-      <div>
-        <label htmlFor={input.id}>{input.label}</label>
-        <FieldArray
-          name={input.name}
-          render={arrayHelpers => (
-            <div>
-              {input.options!.map(o => (
-                <div key={o.id} style={divStyle}>
-                  <label>
-                    <input
-                      name={input.name}
-                      type="checkbox"
-                      value={o.id}
-                      checked={form.values[input.name].includes(o.id)}
-                      onChange={e => {
-                        if (e.target.checked) {
-                          arrayHelpers.push(o.id);
-                        } else {
-                          const idx = form.values[input.name].indexOf(o.id);
-                          arrayHelpers.remove(idx);
-                        }
-                      }}
-                    />{' '}
-                    {o.label}
-                  </label>
-                </div>
-              ))}
-            </div>
-          )}
-        />
-      </div>
-    );
+    return <CheckboxGroup field={input} form={form} />;
   }
 
   renderRadioButtons(input: FieldConfig, form: any) {
-    return (
-      <div>
-        <label htmlFor={input.id}>{input.label}</label>
-        <FieldArray
-          name={input.name}
-          render={arrayHelpers => (
-            <div>
-              {input.options!.map(o => (
-                <div key={o.id}>
-                  <label>
-                    <input
-                      name={input.name}
-                      id={o.id}
-                      type="radio"
-                      value={o.id}
-                      checked={form.values[input.name].includes(o.id)}
-                      onChange={form.handleChange}
-                    />
-                    {o.label}
-                  </label>
-                </div>
-              ))}
-            </div>
-          )}
-        />
-      </div>
-    );
+    return <RadioButton field={input} form={form} />;
   }
 
   renderDatePicker(input: FieldConfig, form: any) {

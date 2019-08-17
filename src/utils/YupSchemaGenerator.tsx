@@ -4,10 +4,15 @@ export default function createYupSchema(schema: any, config: any) {
   let { id, type, validations = [] } = config;
   // let validationType: any = type;
 
-  const inputTypes = ['text', 'email'];
+  const inputTypes = ['text', 'email', 'radio'];
 
   if (inputTypes.includes(type)) {
     type = 'string';
+  }
+
+  const arrayTypes = ['checkbox_group'];
+  if (arrayTypes.includes(type)) {
+    type = 'array';
   }
 
   if (!Yup[type]) {
