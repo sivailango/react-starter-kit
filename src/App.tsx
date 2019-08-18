@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { BrowserRouter as HashRouter, Route, Switch } from 'react-router-dom';
+
 import * as Yup from 'yup';
 
 import './App.css';
@@ -11,6 +13,10 @@ import Header from './components/layout/Header';
 import SideBar from './components/layout/SideBar';
 import PageContent from './components/layout/PageContent';
 import Footer from './components/layout/Footer';
+
+import BlankPageContainer from './containers/BlankPageContainer';
+import LoggedInContainer from './containers/LoggedInContainer';
+import NotFound from './containers/NotFound';
 
 import { IButton } from './components/lib/Index';
 
@@ -177,19 +183,26 @@ class App extends Component {
     const validateSchema = Yup.object().shape(yepSchema);
 
     return (
-      <div>
-        {/*
-          <SideBar />
-          <Header />
-        */}
+      <HashRouter>
+        <Switch>
+          <Route exact path="/" component={BlankPageContainer} />
+          <LoggedInContainer>
+            <Route path="/blank" component={BlankPageContainer} />
+          </LoggedInContainer>
+          <Route component={NotFound} />
+        </Switch>
+      </HashRouter>
+    );
+  }
+}
 
-        <div>
-          {/*
+export default connect()(App);
+
+{
+  /*
           <Form onSubmit={this.handleSubmit} />
           <PageContent />
           <Footer />
-          */}
-
           <DynamicForm
             fields={fields}
             validation={validateSchema}
@@ -197,8 +210,5 @@ class App extends Component {
           />
         </div>
       </div>
-    );
-  }
+      */
 }
-
-export default connect()(App);

@@ -40,7 +40,8 @@ select {
 /* ====== 0. End of Override Bootstrap ===== */
 
 /* ====== 1. Page Content ===== */
-#sidebar {
+.sidebar,
+.sidebar-sm {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -53,10 +54,24 @@ select {
   background-position: 50%;
   background-color: #e3e3e3;
 }
-#page-container {
+.sidebar {
+  width: 260px;
+}
+.sidebar-sm {
+  width: 60px;
+}
+.sidebar-sm .sidebar-nav {
+  padding-left: 0;
+}
+.page-container {
   position: relative;
   float: right;
+}
+.sidebar ~ .page-container {
   width: calc(100% - 260px);
+}
+.sidebar-sm ~ .page-container {
+  width: calc(100% - 60px);
 }
 #page-content {
   min-height: 85vh;
@@ -92,6 +107,27 @@ small {
 .sidebar-nav-submenu {
   list-style: none;
   padding-left: 30px;
+}
+.sidebar-sm .sidebar-nav > li.sidebar-nav-item {
+  height: 50px;
+}
+.sidebar-sm a.sidebar-nav-link i {
+  float: none;
+  font-size: 20px;
+}
+.sidebar-sm li.sidebar-nav-item > a.sidebar-nav-link {
+  display: block;
+  padding: 0 !important;
+  height: inherit;
+  text-align: center;
+  line-height: 50px;
+}
+.popover-inner ul.sidebar-nav-submenu {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.popover-inner ul.sidebar-nav-submenu li {
+  cursor: pointer;
 }
 .sidebar-nav > li.sidebar-nav-item {
   list-style: none;

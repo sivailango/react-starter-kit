@@ -41,7 +41,6 @@ class Header extends React.Component<Props, State> {
     return (
       <Navbar color="light" light expand="md">
         <i className="mdi mdi-menu" />
-        <NavbarBrand href="/">React App</NavbarBrand>
         <NavbarToggler onClick={this.toggle} />
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>

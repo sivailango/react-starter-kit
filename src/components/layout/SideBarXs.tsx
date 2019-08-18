@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { NavLink, Collapse } from 'reactstrap';
+import { NavLink, Popover } from 'reactstrap';
 
 import sideBarRoutes from './../../routes/Sidebar.Routes';
 
@@ -10,7 +10,7 @@ interface State {
   activeSubMenu: any;
 }
 
-export default class SideBar extends React.Component<Props, State> {
+export default class SideBarXs extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.toggle = this.toggle.bind(this);
@@ -32,7 +32,7 @@ export default class SideBar extends React.Component<Props, State> {
 
   render() {
     return (
-      <nav className="sidebar">
+      <nav className="sidebar-sm">
         <div>
           <a className="logo text-center">Logo</a>
           <ul className="sidebar-nav">
@@ -43,13 +43,18 @@ export default class SideBar extends React.Component<Props, State> {
                     <NavLink
                       to={v.path}
                       className="sidebar-nav-link"
+                      id={`sidebar-${v.index}`}
                       onClick={() => this.toggle(v.index)}
                     >
-                      <i className={`nav-link-icon mdi ${v.icon}`} />
-                      {v.label}
-                      <i className="mdi mdi-chevron-right" />
+                      <i className={`mdi ${v.icon}`} />
                     </NavLink>
-                    <Collapse isOpen={this.state.activeSubMenu === v.index}>
+                    <Popover
+                      placement="right-start"
+                      hideArrow={true}
+                      isOpen={this.state.activeSubMenu === v.index}
+                      target={`sidebar-${v.index}`}
+                      trigger="hover"
+                    >
                       <ul className="sidebar-nav-submenu">
                         {v.submenus.map((v1, k1) => {
                           return (
@@ -64,7 +69,7 @@ export default class SideBar extends React.Component<Props, State> {
                           );
                         })}
                       </ul>
-                    </Collapse>
+                    </Popover>
                   </li>
                 );
               } else {
@@ -75,8 +80,7 @@ export default class SideBar extends React.Component<Props, State> {
                       className="sidebar-nav-link"
                       onClick={() => this.toggle(v.index)}
                     >
-                      <i className={`nav-link-icon mdi ${v.icon}`} />
-                      {v.label}
+                      <i className={`mdi ${v.icon}`} />
                     </NavLink>
                   </li>
                 );
