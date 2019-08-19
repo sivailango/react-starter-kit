@@ -262,7 +262,7 @@ class DynamicForm extends React.Component<Props> {
                   </form>
                 </div>
               </Col>
-              <Col sm={{ size: 4 }}>
+              <Col sm={{ size: 6 }}>
                 <DisplayFormikState {...form} />
               </Col>
             </Row>

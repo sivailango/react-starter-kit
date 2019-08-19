@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 
+import { BrowserRouter as HashRouter, Route, Switch } from 'react-router-dom';
+
+import BlankPageContainer from './BlankPageContainer';
+import JsonForm from './JsonForm';
+
 import Header from './../components/layout/Header';
 import SideBar from './../components/layout/SideBar';
 import SideBarXs from './../components/layout/SideBarXs';
@@ -17,8 +22,6 @@ export default class LoggedInContainer extends Component<Props, State> {
       breakPoint: 'lg',
     };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
-
-    // this.updateWindowDimensions();
   }
 
   componentDidMount() {
@@ -27,9 +30,6 @@ export default class LoggedInContainer extends Component<Props, State> {
   }
 
   updateWindowDimensions() {
-    console.log(window);
-    console.log(document);
-
     const innerWidth = window.innerWidth;
 
     if (innerWidth < 480) {
@@ -60,13 +60,20 @@ export default class LoggedInContainer extends Component<Props, State> {
 
     return (
       <div>
-        {/* <WrappedComponent isLoading={this.props.projects.loading}>     */}
         <Header {...this.props} />
-        {/* </WrappedComponent> */}
         {sideBar}
         <div className="page-container">
           <div className="container-fluid">
-            <div>Blank Page</div>
+            <Switch>
+              <Route path="/dashboard" exact component={JsonForm} />
+              <Route path="/forms/json" exact component={JsonForm} />
+              <Route path="/forms/json" exact component={JsonForm} />
+              <Route path="/forms/components" exact component={JsonForm} />
+              <Route path="/charts" exact component={JsonForm} />
+              <Route path="/table/basic" exact component={JsonForm} />
+              <Route path="/table/dataTable" exact component={JsonForm} />
+              <Route path="/blank" exact component={BlankPageContainer} />
+            </Switch>
           </div>
         </div>
       </div>

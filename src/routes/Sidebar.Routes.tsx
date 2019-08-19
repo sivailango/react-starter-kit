@@ -1,21 +1,9 @@
 const sideBarRoutes = [
   {
     index: 0,
-    path: '/home',
+    path: '/dashboard',
     label: 'Dashboard',
     icon: 'icon mdi mdi-home-outline',
-    submenus: [
-      {
-        path: '/pages/sub-menu-1',
-        label: 'People',
-        icon: '',
-      },
-      {
-        path: '/pages/sub-menu-1',
-        label: 'Revenue',
-        icon: '',
-      },
-    ],
   },
   {
     index: 1,
@@ -24,12 +12,12 @@ const sideBarRoutes = [
     icon: 'icon mdi mdi-home-outline',
     submenus: [
       {
-        path: '/pages/sub-menu-1',
+        path: '/forms/json',
         label: 'JSON Form',
         icon: '',
       },
       {
-        path: '/pages/sub-menu-1',
+        path: '/forms/components',
         label: 'Components',
         icon: '',
       },
@@ -37,7 +25,7 @@ const sideBarRoutes = [
   },
   {
     index: 2,
-    path: '/profile',
+    path: '/charts',
     label: 'Charts',
     icon: 'icon mdi mdi-book-outline',
   },
@@ -48,16 +36,22 @@ const sideBarRoutes = [
     icon: 'icon mdi mdi-settings-outline',
     submenus: [
       {
-        path: '/pages/sub-menu-1',
+        path: '/table/basic',
         label: 'Simple',
         icon: '',
       },
       {
-        path: '/pages/sub-menu-1',
+        path: '/table/dataTable',
         label: 'Data Table',
         icon: '',
       },
     ],
+  },
+  {
+    index: 4,
+    path: '/blank',
+    label: 'Blank',
+    icon: 'icon mdi mdi-book-outline',
   },
 ];
 
