@@ -1,6 +1,8 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
 
+import classNames from 'classnames';
+
 import InputHint from './forms/InputHint';
 import RequiredField from './forms/RequiredField';
 
@@ -30,8 +32,13 @@ export default class CustomDatePicker extends React.Component<InputProps, any> {
     }
   }
   render() {
+    const cn = classNames({
+      'form-group': true,
+      'col-md-6': this.props.meta.layout === 'grid',
+    });
+
     return (
-      <div className="form-group">
+      <div className={cn}>
         <label>
           {this.props.field.label} {this.state.isRequired && <RequiredField />}
         </label>

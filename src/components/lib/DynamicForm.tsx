@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Formik, Field, FieldArray } from 'formik';
 
+import classNames from 'classnames';
+
 import FieldConfig from 'models/InputFieldConfig';
 
 import { DisplayFormikState } from './FormikDebug';
@@ -32,14 +34,33 @@ import {
 interface Props {
   fields: Array<FieldConfig>;
   errors?: Array<any>;
+  layout?: 'grid' | 'vertical' | 'horizontal';
+  layoutGrid?: number;
   validation?: any;
   onFormSubmit: Function;
 }
 
-class DynamicForm extends React.Component<Props> {
+interface State {
+  layout: any;
+}
+
+class DynamicForm extends React.Component<Props, any> {
+  static defaultProps = {
+    layout: 'vertical',
+    layoutGrid: 2,
+  };
+
   constructor(props: Props) {
     super(props);
   }
+
+  componentWillMount() {
+    this.setState({
+      layout: this.props.layout,
+      layoutGrid: this.props.layoutGrid,
+    });
+  }
+
   renderFields(inputs: Array<FieldConfig>, form: any) {
     return inputs.map(input => {
       if (input.type === 'select') {
@@ -106,15 +127,15 @@ class DynamicForm extends React.Component<Props> {
   }
 
   renderInputNumber(input: FieldConfig, form: any) {
-    return <InputNumber field={input} form={form} />;
+    return <InputNumber field={input} form={form} meta={this.state} />;
   }
 
   renderPassword(input: FieldConfig, form: any) {
-    return <Password field={input} form={form} />;
+    return <Password field={input} form={form} meta={this.state} />;
   }
 
   renderToggle(input: FieldConfig, form: any) {
-    return <InputToggle field={input} form={form} />;
+    return <InputToggle field={input} form={form} meta={this.state} />;
   }
 
   renderReactSelect(input: FieldConfig, form: any) {
@@ -129,20 +150,21 @@ class DynamicForm extends React.Component<Props> {
         fieldConfig={input}
         form={form}
         multi={true}
+        meta={this.state}
       />
     );
   }
 
   renderTextbox(input: FieldConfig, form: any) {
-    return <InputText field={input} form={form} />;
+    return <InputText field={input} form={form} meta={this.state} />;
   }
 
   renderEmail(input: FieldConfig, form: any) {
-    return <InputEmail field={input} form={form} />;
+    return <InputEmail field={input} form={form} meta={this.state} />;
   }
 
   renderCheckbox(input: FieldConfig, form: any) {
-    return <Checkbox field={input} form={form} />;
+    return <Checkbox field={input} form={form} meta={this.state} />;
     /*
     return (
       <FormGroup check key={item.id}>
@@ -160,15 +182,15 @@ class DynamicForm extends React.Component<Props> {
   }
 
   renderCheckboxes(input: FieldConfig, form: any) {
-    return <CheckboxGroup field={input} form={form} />;
+    return <CheckboxGroup field={input} form={form} meta={this.state} />;
   }
 
   renderRadioButtons(input: FieldConfig, form: any) {
-    return <RadioButton field={input} form={form} />;
+    return <RadioButton field={input} form={form} meta={this.state} />;
   }
 
   renderDatePicker(input: FieldConfig, form: any) {
-    return <CustomDatePicker field={input} form={form} />;
+    return <CustomDatePicker field={input} form={form} meta={this.state} />;
   }
 
   renderFile(input: FieldConfig) {}
@@ -178,12 +200,17 @@ class DynamicForm extends React.Component<Props> {
   renderTimePicker(input: FieldConfig) {}
 
   renderDataTimePicker(input: FieldConfig, form: any) {
-    return <CustomDatePicker field={input} form={form} />;
+    return <CustomDatePicker field={input} form={form} meta={this.state} />;
   }
 
   renderSelect(input: FieldConfig) {
+    const cn = classNames({
+      'form-group': true,
+      'col-md-6': this.props.layout === 'grid',
+    });
+
     return (
-      <div key={input.id} className="form-group">
+      <div key={input.id} className={cn}>
         <label>{input.label}</label>
         <Field
           name={input.name}
@@ -246,18 +273,21 @@ class DynamicForm extends React.Component<Props> {
             <Row>
               <Col sm={{ size: 12 }}>
                 <div>
-                  <form onSubmit={form.handleSubmit}>
+                  <form onSubmit={form.handleSubmit} className="row">
                     {this.renderFields(this.props.fields, form)}
-                    <button
-                      type="reset"
-                      className="btn btn-secondary"
-                      onClick={form.handleReset}
-                    >
-                      Reset
-                    </button>
-                    <button type="submit" className="btn btn-primary">
-                      Submit
-                    </button>
+                    <div>
+                      <button
+                        type="reset"
+                        className="btn btn-secondary"
+                        onClick={form.handleReset}
+                      >
+                        Reset
+                      </button>
+                      &nbsp;&nbsp;
+                      <button type="submit" className="btn btn-primary">
+                        Submit
+                      </button>
+                    </div>
                   </form>
                 </div>
               </Col>

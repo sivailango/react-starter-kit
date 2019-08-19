@@ -15,6 +15,12 @@ export default class InputEmail extends Component<InputProps, any> {
   }
 
   render() {
-    return <InputText form={this.props.form} field={this.props.field} />;
+    return (
+      <InputText
+        form={this.props.form}
+        field={this.props.field}
+        meta={this.props.meta}
+      />
+    );
   }
 }

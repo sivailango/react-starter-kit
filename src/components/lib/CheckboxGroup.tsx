@@ -87,8 +87,13 @@ class CheckboxGroup extends React.Component<InputProps, State> {
   */
 
   render() {
+    const cn = classNames({
+      'form-group': true,
+      'col-md-6': this.props.meta.layout === 'grid',
+    });
+
     return (
-      <div className="form-group">
+      <div className={cn}>
         <label htmlFor={this.props.field.id}>
           {this.props.field.label} {this.state.isRequired && <RequiredField />}
         </label>

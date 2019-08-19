@@ -1,13 +1,20 @@
 import React from 'react';
 
+import classNames from 'classnames';
+
 class Checkbox extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
   }
 
   render() {
+    const cn = classNames({
+      'form-group': true,
+      'col-md-6': this.props.meta.layout === 'grid',
+    });
+
     return (
-      <div className="form-group">
+      <div className={cn}>
         <input
           name={this.props.field.name}
           id={this.props.field.id}

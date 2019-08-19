@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Collapse, NavLink as BsNavLink } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 
-import sideBarRoutes from './../../routes/Sidebar.Routes';
+import sideBarRoutes from 'routes/Sidebar.Routes';
 
 interface Props {}
 
@@ -47,7 +47,11 @@ export default class SideBar extends React.Component<Props, State> {
                     >
                       <i className={`nav-link-icon mdi ${v.icon}`} />
                       {v.label}
-                      <i className="mdi mdi-chevron-right" />
+                      {this.state.activeSubMenu === v.index ? (
+                        <i className="mdi mdi-chevron-down" />
+                      ) : (
+                        <i className="mdi mdi-chevron-right" />
+                      )}
                     </BsNavLink>
                     <Collapse isOpen={this.state.activeSubMenu === v.index}>
                       <ul className="sidebar-nav-submenu">

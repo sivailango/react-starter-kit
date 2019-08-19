@@ -69,6 +69,7 @@ select {
 .page-container {
   position: relative;
   float: right;
+  margin-bottom: 15px;
 }
 .sidebar ~ .page-container {
   width: calc(100% - 240px);

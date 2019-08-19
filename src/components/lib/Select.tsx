@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
 import Select from 'react-select';
+import classNames from 'classnames';
 
 class ReactSelect extends React.Component<any> {
   constructor(props: any) {
@@ -17,8 +18,13 @@ class ReactSelect extends React.Component<any> {
   };
 
   render() {
+    const cn = classNames({
+      'form-group': true,
+      'col-md-6': this.props.meta.layout === 'grid',
+    });
+
     return (
-      <div className="form-group">
+      <div className={cn}>
         <label htmlFor="color">{this.props.fieldConfig.label}</label>
         <Select
           id={this.props.fieldConfig.id}

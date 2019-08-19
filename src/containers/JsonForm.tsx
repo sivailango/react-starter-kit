@@ -6,6 +6,8 @@ import DynamicForm from 'components/lib/DynamicForm';
 import FieldConfig from 'models/InputFieldConfig';
 import createYupSchema from 'utils/YupSchemaGenerator';
 
+import { fields } from 'data/forms/JsonForm';
+
 interface Props {}
 interface State {}
 
@@ -17,148 +19,14 @@ export default class JsonForm extends Component<Props, State> {
   }
 
   render() {
-    const fields: Array<FieldConfig> = [
-      {
-        id: 'firstName',
-        label: 'First Name',
-        type: 'text',
-        name: 'firstName',
-        // onChange: this.onChangeTest,
-        value: '',
-        validations: [
-          {
-            type: 'required',
-            params: ['This field is required'],
-          },
-        ],
-      },
-      {
-        id: 'email',
-        label: 'Email',
-        type: 'email',
-        name: 'email',
-        value: '',
-        validations: [
-          {
-            type: 'required',
-            params: ['This field is required'],
-          },
-          {
-            type: 'email',
-            params: ['Invalid Email format'],
-          },
-        ],
-      },
-      {
-        id: 'dob',
-        label: 'DOB',
-        type: 'datepicker',
-        name: 'dob',
-        value: '',
-        validations: [
-          {
-            type: 'required',
-            params: ['This field is required'],
-          },
-        ],
-      },
-      {
-        id: 'password',
-        label: 'Password',
-        type: 'password',
-        name: 'password',
-        value: '',
-      },
-      {
-        id: 'currency',
-        label: 'Currency',
-        type: 'number',
-        name: 'currency',
-      },
-      {
-        id: 'country',
-        label: 'Country',
-        type: 'select',
-        name: 'country',
-        value: '',
-        options: [
-          { id: '1', value: '1', label: 'India' },
-          { id: '2', value: '2', label: 'UK' },
-        ],
-      },
-      {
-        id: 'countries',
-        label: 'Countries you have been?',
-        type: 'react_select',
-        name: 'countries',
-        value: [],
-        options: [
-          { value: 'india', label: 'India' },
-          { value: 'us', label: 'US' },
-          { value: 'uk', label: 'UK' },
-        ],
-      },
-      {
-        id: 'is_agreed',
-        label: 'I agree',
-        type: 'checkbox',
-        name: 'is_agreed',
-        value: false,
-      },
-      {
-        id: 'languages_known',
-        label: 'Languages Known?',
-        type: 'checkbox_group',
-        name: 'languages_known',
-        position: 'grid',
-        positionGrid: 4,
-        value: [],
-        options: [
-          { id: 'en', value: 'en', label: 'English', disabled: true },
-          { id: 'tamil', value: 'tamil', label: 'Tamil' },
-          { id: 'telugu', value: 'telugu', label: 'Telugu' },
-        ],
-        validations: [
-          {
-            type: 'required',
-            params: ['This field is required'],
-          },
-        ],
-      },
-      {
-        id: 'current_country',
-        label: 'Current Country?',
-        type: 'radio',
-        name: 'current_country',
-        value: '',
-        position: 'vertical',
-        options: [
-          { id: 'india', value: 'india', label: 'India' },
-          { id: 'us', value: 'us', label: 'US' },
-        ],
-        validations: [
-          {
-            type: 'required',
-            params: ['This field is required'],
-          },
-        ],
-      },
-      {
-        id: 'is_enabled',
-        label: 'is_enabled',
-        type: 'toggle',
-        name: 'is_enabled',
-        value: '',
-        title: 'Is Agreed?',
-      },
-    ];
-
     const yepSchema = fields.reduce(createYupSchema, {});
     const validateSchema = Yup.object().shape(yepSchema);
 
     return (
       <div>
         <DynamicForm
+          layout="grid"
+          layoutGrid={2}
           fields={fields}
           validation={validateSchema}
           onFormSubmit={this.onFormSubmit}

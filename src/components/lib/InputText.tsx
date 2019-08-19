@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 
 import { Formik, Field, FieldArray } from 'formik';
 
+import classNames from 'classnames';
+
 import InputHint from './forms/InputHint';
 import RequiredField from './forms/RequiredField';
 
@@ -51,8 +53,13 @@ export default class InputText extends Component<InputProps, any> {
   }
 
   render() {
+    const cn = classNames({
+      'form-group': true,
+      'col-md-6': this.props.meta.layout === 'grid',
+    });
+
     return (
-      <div className="form-group" key={this.props.field.id}>
+      <div className={cn} key={this.props.field.id}>
         <label>
           {this.props.field.label} {this.state.isRequired && <RequiredField />}
         </label>

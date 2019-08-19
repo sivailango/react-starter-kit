@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Formik, Field, FieldArray } from 'formik';
 
+import classNames from 'classnames';
+
 import Lock from '@material-ui/icons/Lock';
 import LockOpen from '@material-ui/icons/LockOpen';
 
@@ -58,8 +60,13 @@ export default class Password extends React.Component<InputProps, State> {
       lockIcon = <LockOpen />;
     }
 
+    const cn = classNames({
+      'form-group': true,
+      'col-md-6': this.props.meta.layout === 'grid',
+    });
+
     return (
-      <div className="form-group">
+      <div className={cn}>
         <label>
           {this.props.field.label} {this.state.isRequired && <RequiredField />}
         </label>
