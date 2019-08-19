@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 
 import { BrowserRouter as HashRouter, Route, Switch } from 'react-router-dom';
 
+import DashboardContainer from './DashboardContainer';
+
+import ChartsContainer from './ChartsContainer';
+
 import BlankPageContainer from './BlankPageContainer';
 import JsonForm from './JsonForm';
 
@@ -65,14 +69,17 @@ export default class LoggedInContainer extends Component<Props, State> {
         <div className="page-container">
           <div className="container-fluid">
             <Switch>
-              <Route path="/dashboard" exact component={JsonForm} />
-              <Route path="/forms/json" exact component={JsonForm} />
-              <Route path="/forms/json" exact component={JsonForm} />
-              <Route path="/forms/components" exact component={JsonForm} />
-              <Route path="/charts" exact component={JsonForm} />
-              <Route path="/table/basic" exact component={JsonForm} />
-              <Route path="/table/dataTable" exact component={JsonForm} />
-              <Route path="/blank" exact component={BlankPageContainer} />
+              <Route
+                path="/app/dashboard"
+                exact
+                component={DashboardContainer}
+              />
+              <Route path="/app/forms/json" exact component={JsonForm} />
+              <Route path="/app/forms/components" exact component={JsonForm} />
+              <Route path="/app/charts" exact component={ChartsContainer} />
+              <Route path="/app/table/basic" exact component={JsonForm} />
+              <Route path="/app/table/dataTable" exact component={JsonForm} />
+              <Route path="/app/blank" exact component={BlankPageContainer} />
             </Switch>
           </div>
         </div>

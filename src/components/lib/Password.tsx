@@ -4,14 +4,20 @@ import { Formik, Field, FieldArray } from 'formik';
 import Lock from '@material-ui/icons/Lock';
 import LockOpen from '@material-ui/icons/LockOpen';
 
+import InputHint from './forms/InputHint';
+import RequiredField from './forms/RequiredField';
+
+import InputProps from 'models/InputProps';
+
 export interface IPasswordProps {}
 
 export interface State {
   type: string;
+  isRequired?: boolean;
 }
 
-export default class Password extends React.Component<any, State> {
-  constructor(props: any) {
+export default class Password extends React.Component<InputProps, State> {
+  constructor(props: InputProps) {
     super(props);
 
     this.state = {
@@ -21,10 +27,26 @@ export default class Password extends React.Component<any, State> {
     this.show = this.show.bind(this);
   }
 
+  componentDidMount() {
+    this.checkRequired();
+  }
+
   show() {
     this.setState({
       type: this.state.type === 'input' ? 'password' : 'input',
     });
+  }
+
+  checkRequired() {
+    if (this.props.field.validations) {
+      const o = this.props.field.validations.filter(v => v.type === 'required');
+
+      if (o) {
+        this.setState({
+          isRequired: true,
+        });
+      }
+    }
   }
 
   public render() {
@@ -38,7 +60,9 @@ export default class Password extends React.Component<any, State> {
 
     return (
       <div className="form-group">
-        <label>{this.props.field.label}</label>
+        <label>
+          {this.props.field.label} {this.state.isRequired && <RequiredField />}
+        </label>
         <div className="input-group" key={this.props.field.id}>
           <input
             name={this.props.field.name}
@@ -59,7 +83,9 @@ export default class Password extends React.Component<any, State> {
         </div>
         {this.props.form.errors[this.props.field.name] &&
           this.props.form.touched[this.props.field.name] && (
-            <div>{this.props.form.errors[this.props.field.name]}</div>
+            <InputHint
+              message={this.props.form.errors[this.props.field.name]}
+            />
           )}
       </div>
     );

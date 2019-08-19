@@ -1,8 +1,10 @@
 import React from 'react';
 import { FieldArray } from 'formik';
 
-import InputProps from './../../models/InputProps';
-import InputOption from './../../models/InputOption';
+import InputHint from './forms/InputHint';
+
+import InputProps from 'models/InputProps';
+import InputOption from 'models/InputOption';
 
 interface State {
   position: string;
@@ -56,7 +58,9 @@ class RadioButton extends React.Component<InputProps, State> {
               ))}
               {this.props.form.errors[this.props.field.name] &&
                 this.props.form.touched[this.props.field.name] && (
-                  <div>{this.props.form.errors[this.props.field.name]}</div>
+                  <InputHint
+                    message={this.props.form.errors[this.props.field.name]}
+                  />
                 )}
             </div>
           )}

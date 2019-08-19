@@ -7,11 +7,12 @@ import { BrowserRouter as HashRouter, Route, Switch } from 'react-router-dom';
 
 import './App.css';
 
-import NotFound from './containers/NotFound';
+import NotFound from 'containers/NotFound';
 
-import BlankPageContainer from './containers/BlankPageContainer';
-import LoggedInContainer from './containers/LoggedInContainer';
-import JsonForm from './containers/JsonForm';
+import LoginContainer from 'containers/LoginContainer';
+import BlankPageContainer from 'containers/BlankPageContainer';
+import LoggedInContainer from 'containers/LoggedInContainer';
+import JsonForm from 'containers/JsonForm';
 
 class App extends Component {
   handleSubmit(values: any) {
@@ -27,11 +28,16 @@ class App extends Component {
     return (
       <HashRouter>
         <Switch>
-          <Route exact path="/" component={BlankPageContainer} />
+          <Route exact path="/" component={LoginContainer} />
+          <Route path="/app" component={LoggedInContainer} />
+          {/*
           <LoggedInContainer>
+            <Route path="/dashboard" component={BlankPageContainer} />
             <Route path="/blank" component={BlankPageContainer} />
             <Route path="/forms/json" component={JsonForm} />
           </LoggedInContainer>
+          */}
+
           <Route component={NotFound} />
         </Switch>
       </HashRouter>

@@ -5,7 +5,7 @@ import { Formik, Field, FieldArray } from 'formik';
 import InputHint from './forms/InputHint';
 import RequiredField from './forms/RequiredField';
 
-import InputProps from './../../models/InputProps';
+import InputProps from 'models/InputProps';
 
 export default class InputText extends Component<InputProps, any> {
   state = {

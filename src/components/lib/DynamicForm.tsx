@@ -242,10 +242,9 @@ class DynamicForm extends React.Component<Props> {
         validationSchema={this.props.validation}
         initialValues={initialValues}
         render={form => {
-          console.log(form);
           return (
             <Row>
-              <Col sm={{ size: 6 }}>
+              <Col sm={{ size: 12 }}>
                 <div>
                   <form onSubmit={form.handleSubmit}>
                     {this.renderFields(this.props.fields, form)}
@@ -262,9 +261,11 @@ class DynamicForm extends React.Component<Props> {
                   </form>
                 </div>
               </Col>
+              {/*}
               <Col sm={{ size: 6 }}>
                 <DisplayFormikState {...form} />
               </Col>
+              */}
             </Row>
           );
         }}

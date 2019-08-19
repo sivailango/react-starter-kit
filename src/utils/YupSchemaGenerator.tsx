@@ -4,7 +4,7 @@ export default function createYupSchema(schema: any, config: any) {
   let { id, type, validations = [] } = config;
   // let validationType: any = type;
 
-  const inputTypes = ['text', 'email', 'radio', 'datepicker'];
+  const inputTypes = ['text', 'email', 'radio', 'datepicker', 'password'];
 
   if (inputTypes.includes(type)) {
     type = 'string';

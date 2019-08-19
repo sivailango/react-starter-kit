@@ -1,12 +1,11 @@
-import FieldConfig from './../models/InputFieldConfig';
+import FieldConfig from 'models/InputFieldConfig';
 
 export const fields: Array<FieldConfig> = [
   {
-    id: 'firstName',
-    label: 'First Name',
+    id: 'username',
+    label: 'Username',
     type: 'text',
-    name: 'firstName',
-    // onChange: this.onChangeTest,
+    name: 'username',
     value: '',
     validations: [
       {
@@ -16,20 +15,16 @@ export const fields: Array<FieldConfig> = [
     ],
   },
   {
-    id: 'email',
-    label: 'Email',
-    type: 'email',
-    name: 'email',
+    id: 'password',
+    label: 'Password',
+    type: 'password',
+    name: 'password',
     value: '',
     validations: [
       {
         type: 'required',
         params: ['This field is required'],
-      },
-      {
-        type: 'email',
-        params: ['Invalid Email format'],
-      },
+      }
     ],
   },
 ];

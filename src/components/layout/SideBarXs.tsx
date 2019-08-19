@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 
-import { NavLink, Popover } from 'reactstrap';
+import { Popover } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
 
-import sideBarRoutes from './../../routes/Sidebar.Routes';
+import sideBarRoutes from 'routes/Sidebar.Routes';
 
 interface Props {}
 

@@ -1,7 +1,7 @@
 const sideBarRoutes = [
   {
     index: 0,
-    path: '/dashboard',
+    path: '/app/dashboard',
     label: 'Dashboard',
     icon: 'icon mdi mdi-home-outline',
   },
@@ -12,12 +12,12 @@ const sideBarRoutes = [
     icon: 'icon mdi mdi-home-outline',
     submenus: [
       {
-        path: '/forms/json',
+        path: '/app/forms/json',
         label: 'JSON Form',
         icon: '',
       },
       {
-        path: '/forms/components',
+        path: '/app/forms/components',
         label: 'Components',
         icon: '',
       },
@@ -25,7 +25,7 @@ const sideBarRoutes = [
   },
   {
     index: 2,
-    path: '/charts',
+    path: '/app/charts',
     label: 'Charts',
     icon: 'icon mdi mdi-book-outline',
   },
@@ -36,12 +36,12 @@ const sideBarRoutes = [
     icon: 'icon mdi mdi-settings-outline',
     submenus: [
       {
-        path: '/table/basic',
+        path: '/app/table/basic',
         label: 'Simple',
         icon: '',
       },
       {
-        path: '/table/dataTable',
+        path: '/app/table/dataTable',
         label: 'Data Table',
         icon: '',
       },
@@ -49,7 +49,7 @@ const sideBarRoutes = [
   },
   {
     index: 4,
-    path: '/blank',
+    path: '/app/blank',
     label: 'Blank',
     icon: 'icon mdi mdi-book-outline',
   },

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { NavLink, Collapse } from 'reactstrap';
+import { Collapse, NavLink as BsNavLink } from 'reactstrap';
+import { NavLink } from 'react-router-dom';
 
 import sideBarRoutes from './../../routes/Sidebar.Routes';
 
@@ -40,15 +41,14 @@ export default class SideBar extends React.Component<Props, State> {
               if (v.submenus) {
                 return (
                   <li className="sidebar-nav-item" key={k}>
-                    <NavLink
-                      to={v.path}
+                    <BsNavLink
                       className="sidebar-nav-link"
                       onClick={() => this.toggle(v.index)}
                     >
                       <i className={`nav-link-icon mdi ${v.icon}`} />
                       {v.label}
                       <i className="mdi mdi-chevron-right" />
-                    </NavLink>
+                    </BsNavLink>
                     <Collapse isOpen={this.state.activeSubMenu === v.index}>
                       <ul className="sidebar-nav-submenu">
                         {v.submenus.map((v1, k1) => {

@@ -8,6 +8,7 @@ import Yup from 'yup';
 import classNames from 'classnames';
 
 import Checkbox from './Checkbox';
+import InputHint from './forms/InputHint';
 
 import RequiredField from './forms/RequiredField';
 
@@ -123,10 +124,11 @@ class CheckboxGroup extends React.Component<InputProps, State> {
                   <label htmlFor={o.id}>{o.label}</label>
                 </div>
               ))}
-
               {this.props.form.errors[this.props.field.name] &&
                 this.props.form.touched[this.props.field.name] && (
-                  <div>{this.props.form.errors[this.props.field.name]}</div>
+                  <InputHint
+                    message={this.props.form.errors[this.props.field.name]}
+                  />
                 )}
             </div>
           )}

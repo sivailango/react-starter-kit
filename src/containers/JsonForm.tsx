@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+
 import * as Yup from 'yup';
 
-import DynamicForm from './../components/lib/DynamicForm';
-
-import FieldConfig from './../models/InputFieldConfig';
-
-import createYupSchema from './../utils/YupSchemaGenerator';
+import DynamicForm from 'components/lib/DynamicForm';
+import FieldConfig from 'models/InputFieldConfig';
+import createYupSchema from 'utils/YupSchemaGenerator';
 
 interface Props {}
 interface State {}
