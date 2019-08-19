@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { CustomInput, Form, FormGroup, Label } from 'reactstrap';
 
+import classNames from 'classnames';
+
 export interface IInputToggleProps {}
 
 export default class InputToggle extends React.Component<any> {
@@ -8,8 +10,13 @@ export default class InputToggle extends React.Component<any> {
     super(props);
   }
   public render() {
+    const cn = classNames({
+      'form-group': true,
+      [`col-md-${this.props.meta.layoutGrid}`]: true,
+    });
+
     return (
-      <FormGroup>
+      <div className={cn}>
         <Label>{this.props.field.title}</Label>
         <div>
           <CustomInput
@@ -20,7 +27,7 @@ export default class InputToggle extends React.Component<any> {
             label={this.props.field.label}
           />
         </div>
-      </FormGroup>
+      </div>
     );
   }
 }

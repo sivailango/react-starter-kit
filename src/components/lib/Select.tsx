@@ -20,12 +20,14 @@ class ReactSelect extends React.Component<any> {
   render() {
     const cn = classNames({
       'form-group': true,
-      'col-md-6': this.props.meta.layout === 'grid',
+      [`col-md-${this.props.meta.layoutGrid}`]: true,
     });
 
     return (
       <div className={cn}>
-        <label htmlFor="color">{this.props.fieldConfig.label}</label>
+        <label htmlFor={this.props.fieldConfig.id}>
+          {this.props.fieldConfig.label}
+        </label>
         <Select
           id={this.props.fieldConfig.id}
           options={this.props.fieldConfig.options}

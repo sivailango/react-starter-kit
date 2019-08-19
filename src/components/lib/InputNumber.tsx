@@ -20,7 +20,7 @@ export default class InputNumber extends React.Component<any> {
   public render() {
     const cn = classNames({
       'form-group': true,
-      'col-md-6': this.props.meta.layout === 'grid',
+      [`col-md-${this.props.meta.layoutGrid}`]: true,
     });
 
     return (

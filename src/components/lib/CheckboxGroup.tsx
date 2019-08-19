@@ -89,7 +89,7 @@ class CheckboxGroup extends React.Component<InputProps, State> {
   render() {
     const cn = classNames({
       'form-group': true,
-      'col-md-6': this.props.meta.layout === 'grid',
+      [`col-md-${this.props.meta.layoutGrid}`]: true,
     });
 
     return (
@@ -129,15 +129,15 @@ class CheckboxGroup extends React.Component<InputProps, State> {
                   <label htmlFor={o.id}>{o.label}</label>
                 </div>
               ))}
-              {this.props.form.errors[this.props.field.name] &&
-                this.props.form.touched[this.props.field.name] && (
-                  <InputHint
-                    message={this.props.form.errors[this.props.field.name]}
-                  />
-                )}
             </div>
           )}
         />
+        {this.props.form.errors[this.props.field.name] &&
+          this.props.form.touched[this.props.field.name] && (
+            <InputHint
+              message={this.props.form.errors[this.props.field.name]}
+            />
+          )}
       </div>
     );
   }

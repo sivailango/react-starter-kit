@@ -114,7 +114,7 @@ export const fields: Array<FieldConfig> = [
     type: 'radio',
     name: 'current_country',
     value: '',
-    position: 'vertical',
+    position: 'inline',
     options: [
       { id: 'india', value: 'india', label: 'India' },
       { id: 'us', value: 'us', label: 'US' },

@@ -62,7 +62,7 @@ export default class Password extends React.Component<InputProps, State> {
 
     const cn = classNames({
       'form-group': true,
-      'col-md-6': this.props.meta.layout === 'grid',
+      [`col-md-${this.props.meta.layoutGrid}`]: true,
     });
 
     return (

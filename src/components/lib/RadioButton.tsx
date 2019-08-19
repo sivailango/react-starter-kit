@@ -1,6 +1,8 @@
 import React from 'react';
 import { FieldArray } from 'formik';
 
+import classNames from 'classnames';
+
 import InputHint from './forms/InputHint';
 
 import InputProps from 'models/InputProps';
@@ -31,9 +33,12 @@ class RadioButton extends React.Component<InputProps, State> {
     }
   }
   render() {
-    console.log(this.props);
+    const cn = classNames({
+      'form-group': true,
+      [`col-md-${this.props.meta.layoutGrid}`]: true,
+    });
     return (
-      <div className="form-group">
+      <div className={cn}>
         <label htmlFor={this.props.field.id}>{this.props.field.label}</label>
         <FieldArray
           name={this.props.field.name}

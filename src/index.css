@@ -169,6 +169,7 @@ a.sidebar-nav-link i {
 .rb.inline,
 .cb.inline {
   display: inline;
+  margin-right: 10px;
 }
 .rb.vertical,
 .cb.vertical {

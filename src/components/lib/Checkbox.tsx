@@ -10,7 +10,7 @@ class Checkbox extends React.Component<any, any> {
   render() {
     const cn = classNames({
       'form-group': true,
-      'col-md-6': this.props.meta.layout === 'grid',
+      [`col-md-${this.props.meta.layoutGrid}`]: true,
     });
 
     return (

@@ -206,7 +206,7 @@ class DynamicForm extends React.Component<Props, any> {
   renderSelect(input: FieldConfig) {
     const cn = classNames({
       'form-group': true,
-      'col-md-6': this.props.layout === 'grid',
+      [`col-md-${this.props.layoutGrid}`]: true,
     });
 
     return (
@@ -261,6 +261,11 @@ class DynamicForm extends React.Component<Props, any> {
 
   render() {
     const initialValues = this.getInitialValues(this.props.fields);
+
+    const formContainerClass = classNames({
+      row: this.props.layout === 'grid',
+    });
+
     return (
       <Formik
         onSubmit={values => {
@@ -273,8 +278,10 @@ class DynamicForm extends React.Component<Props, any> {
             <Row>
               <Col sm={{ size: 12 }}>
                 <div>
-                  <form onSubmit={form.handleSubmit} className="row">
-                    {this.renderFields(this.props.fields, form)}
+                  <form onSubmit={form.handleSubmit}>
+                    <div className={formContainerClass}>
+                      {this.renderFields(this.props.fields, form)}
+                    </div>
                     <div>
                       <button
                         type="reset"
