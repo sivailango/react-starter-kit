@@ -1,9 +1,13 @@
 import InputOption from './InputOption';
 
 export interface FieldConfig {
+  arrayFields?: {
+    headers: Array<{ label: string; grid: number }>;
+    fields: Array<FieldConfig>;
+  };
   classNames?: string;
   disabled?: boolean;
-  id: string;
+  id?: string;
   label?: string;
   name: string;
   place?: number;
@@ -29,7 +33,8 @@ export interface FieldConfig {
     | 'checkbox_group'
     | 'radio'
     | 'react_select'
-    | 'decimal';
+    | 'decimal'
+    | 'array';
   validations?: Array<{
     type:
       | 'required'

@@ -165,4 +165,24 @@ export const fields: Array<FieldConfig> = [
     value: '',
     title: 'Is Agreed?',
   },
+  {
+    id: 'family_members',
+    label: 'is_enabled',
+    type: 'array',
+    name: 'family_members',
+    value: '',
+    arrayFields: {
+      headers: [{ label: 'Name', grid: 3 }, { label: 'Age', grid: 3 }],
+      fields: [
+        {
+          name: 'name',
+          type: 'text',
+        },
+        {
+          name: 'age',
+          type: 'text',
+        },
+      ],
+    },
+  },
 ];

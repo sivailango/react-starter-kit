@@ -1,5 +1,5 @@
 import FieldConfig from './InputFieldConfig';
 
-export interface FormFields {
+export default interface FormFields {
   fields: Array<FieldConfig>;
 }

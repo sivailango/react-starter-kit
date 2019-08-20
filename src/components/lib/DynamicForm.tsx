@@ -127,7 +127,15 @@ class DynamicForm extends React.Component<Props, any> {
         // DONE
         return this.renderDecimal(input, form, classes, lClass, dClass);
       }
+      if (input.type === 'array') {
+        // DONE
+        return this.renderArray(input, form);
+      }
     });
+  }
+
+  renderArray(input: FieldConfig, form: any) {
+    // console.log(input);
   }
 
   renderDecimal(
@@ -498,6 +506,50 @@ class DynamicForm extends React.Component<Props, any> {
                         lClass,
                         dClass
                       )}
+                    </div>
+                    <div>
+                      <FieldArray
+                        name="friends"
+                        render={arrayHelpers => (
+                          <div>
+                            {form.values.friends &&
+                            form.values.friends.length > 0 ? (
+                              form.values.friends.map(
+                                (friend: any, index: number) => (
+                                  <div key={index}>
+                                    <Field name={`friends.${index}`} />
+                                    <button
+                                      type="button"
+                                      onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                                    >
+                                      -
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() =>
+                                        arrayHelpers.insert(index, '')
+                                      } // insert an empty string at a position
+                                    >
+                                      +
+                                    </button>
+                                  </div>
+                                )
+                              )
+                            ) : (
+                              <button
+                                type="button"
+                                onClick={() => arrayHelpers.push('')}
+                              >
+                                {/* show this when user has removed all friends from the list */}
+                                Add a friend
+                              </button>
+                            )}
+                            <div>
+                              <button type="submit">Submit</button>
+                            </div>
+                          </div>
+                        )}
+                      />
                     </div>
                     <div>
                       <button

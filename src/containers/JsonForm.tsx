@@ -8,6 +8,8 @@ import createYupSchema from 'utils/YupSchemaGenerator';
 
 import { fields } from 'data/forms/JsonForm';
 
+import { validateJsonForm } from 'utils/Form';
+
 interface Props {}
 interface State {}
 
@@ -19,6 +21,7 @@ export default class JsonForm extends Component<Props, State> {
   }
 
   render() {
+    console.log(validateJsonForm(fields));
     const yepSchema = fields.reduce(createYupSchema, {});
     const validateSchema = Yup.object().shape(yepSchema);
 
