@@ -5,6 +5,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px !important;
 }
+
+.react-datepicker {
+  font-family: 'Lato', sans-serif !important;
+  border-radius: 0 !important;
+}
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range,
+.react-datepicker__month-text--selected,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__day:hover,
+.react-datepicker__month-text:hover,
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__month-text--keyboard-selected {
+  border-radius: 0 !important;
+}
+.react-datepicker-popper .react-datepicker__triangle,
+.react-datepicker-popper {
+  margin-top: 0 !important;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -39,6 +61,9 @@ select {
 .required {
   color: red;
   font-weight: 600;
+}
+form > div.right .form-group > label {
+  text-align: right;
 }
 /* ====== 0. End of Override Bootstrap ===== */
 

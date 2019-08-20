@@ -4,12 +4,14 @@ import { FieldArray } from 'formik';
 import classNames from 'classnames';
 
 import InputHint from './forms/InputHint';
+import RequiredField from './forms/RequiredField';
 
 import InputProps from 'models/InputProps';
 import InputOption from 'models/InputOption';
 
 interface State {
   position: string;
+  isRequired?: boolean;
 }
 
 class RadioButton extends React.Component<InputProps, State> {
@@ -23,6 +25,19 @@ class RadioButton extends React.Component<InputProps, State> {
 
   componentDidMount() {
     this.setPosition();
+    this.checkRequired();
+  }
+
+  checkRequired() {
+    if (this.props.field.validations) {
+      const o = this.props.field.validations.filter(v => v.type === 'required');
+
+      if (o) {
+        this.setState({
+          isRequired: true,
+        });
+      }
+    }
   }
 
   setPosition() {
@@ -33,17 +48,15 @@ class RadioButton extends React.Component<InputProps, State> {
     }
   }
   render() {
-    const cn = classNames({
-      'form-group': true,
-      [`col-md-${this.props.meta.layoutGrid}`]: true,
-    });
     return (
-      <div className={cn}>
-        <label htmlFor={this.props.field.id}>{this.props.field.label}</label>
+      <div className={this.props.classes}>
+        <label htmlFor={this.props.field.id} className={this.props.lClass}>
+          {this.props.field.label} {this.state.isRequired && <RequiredField />}
+        </label>
         <FieldArray
           name={this.props.field.name}
           render={arrayHelpers => (
-            <div>
+            <div className={this.props.dClass}>
               {this.props.field.options!.map((o: InputOption) => (
                 <div key={o.id} className={`rb ${this.state.position}`}>
                   <label>

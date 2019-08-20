@@ -5,8 +5,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import './custom.scss';
+
 import 'react-datepicker/dist/react-datepicker.css';
+import './custom.scss';
 
 import { Provider } from 'react-redux';
 

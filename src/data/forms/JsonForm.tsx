@@ -51,12 +51,25 @@ export const fields: Array<FieldConfig> = [
     type: 'password',
     name: 'password',
     value: '',
+    validations: [
+      {
+        type: 'required',
+        params: ['This field is required'],
+      },
+    ],
   },
   {
     id: 'currency',
     label: 'Currency',
     type: 'number',
     name: 'currency',
+    value: '',
+    validations: [
+      {
+        type: 'required',
+        params: ['This field is required'],
+      },
+    ],
   },
   {
     id: 'country',
@@ -67,6 +80,12 @@ export const fields: Array<FieldConfig> = [
     options: [
       { id: '1', value: '1', label: 'India' },
       { id: '2', value: '2', label: 'UK' },
+    ],
+    validations: [
+      {
+        type: 'required',
+        params: ['This field is required'],
+      },
     ],
   },
   {
@@ -80,6 +99,12 @@ export const fields: Array<FieldConfig> = [
       { value: 'us', label: 'US' },
       { value: 'uk', label: 'UK' },
     ],
+    validations: [
+      {
+        type: 'required',
+        params: ['This field is required'],
+      },
+    ],
   },
   {
     id: 'is_agreed',
@@ -87,6 +112,12 @@ export const fields: Array<FieldConfig> = [
     type: 'checkbox',
     name: 'is_agreed',
     value: false,
+    validations: [
+      {
+        type: 'required',
+        params: ['This field is required'],
+      },
+    ],
   },
   {
     id: 'languages_known',

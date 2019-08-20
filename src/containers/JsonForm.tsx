@@ -25,8 +25,9 @@ export default class JsonForm extends Component<Props, State> {
     return (
       <div>
         <DynamicForm
-          layout="grid"
-          layoutGrid={3}
+          layout="horizontal"
+          layoutGrid={4}
+          labelPosition="right"
           fields={fields}
           validation={validateSchema}
           onFormSubmit={this.onFormSubmit}

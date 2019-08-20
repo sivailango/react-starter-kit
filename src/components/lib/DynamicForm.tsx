@@ -34,10 +34,11 @@ import {
 interface Props {
   fields: Array<FieldConfig>;
   errors?: Array<any>;
-  layout?: 'grid' | 'vertical' | 'horizontal';
+  layout?: 'grid' | 'vertical' | 'horizontal' | 'custom';
   layoutGrid?: number;
   validation?: any;
   onFormSubmit: Function;
+  labelPosition?: 'left' | 'right';
 }
 
 interface State {
@@ -47,7 +48,8 @@ interface State {
 class DynamicForm extends React.Component<Props, any> {
   static defaultProps = {
     layout: 'vertical',
-    layoutGrid: 2,
+    layoutGrid: 12,
+    labelPosition: 'left',
   };
 
   constructor(props: Props) {
@@ -61,84 +63,144 @@ class DynamicForm extends React.Component<Props, any> {
     });
   }
 
-  renderFields(inputs: Array<FieldConfig>, form: any) {
+  renderFields(
+    inputs: Array<FieldConfig>,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ) {
     return inputs.map(input => {
       if (input.type === 'select') {
         // DONE
-        return this.renderSelect(input);
+        return this.renderSelect(input, form, classes, lClass, dClass);
       }
 
       if (input.type === 'react_select') {
         // DONE
-        return this.renderReactSelect(input, form);
+        return this.renderReactSelect(input, form, classes, lClass, dClass);
       }
       if (input.type === 'checkbox_group') {
         // DONE
-        return this.renderCheckboxes(input, form);
+        return this.renderCheckboxes(input, form, classes, lClass, dClass);
       }
       if (input.type === 'checkbox') {
         // DONE
-        return this.renderCheckbox(input, form);
+        return this.renderCheckbox(input, form, classes, lClass, dClass);
       }
       if (input.type === 'number') {
         // DONE
-        return this.renderInputNumber(input, form);
+        return this.renderInputNumber(input, form, classes, lClass, dClass);
       }
       if (input.type === 'textarea') {
         return this.renderTextarea(input);
       }
       if (input.type === 'password') {
         // DONE
-        return this.renderPassword(input, form);
+        return this.renderPassword(input, form, classes, lClass, dClass);
       }
       if (input.type === 'timepicker') {
         return this.renderTimePicker(input);
       }
       if (input.type === 'datepicker') {
         // DONE
-        return this.renderDatePicker(input, form);
+        return this.renderDatePicker(input, form, classes, lClass, dClass);
       }
       if (input.type === 'text') {
         // DONE
-        return this.renderTextbox(input, form);
+        return this.renderTextbox(input, form, classes, lClass, dClass);
       }
       if (input.type === 'email') {
         // DONE
-        return this.renderEmail(input, form);
+        return this.renderEmail(input, form, classes, lClass, dClass);
       }
       if (input.type === 'radio') {
         // DONE
-        return this.renderRadioButtons(input, form);
+        return this.renderRadioButtons(input, form, classes, lClass, dClass);
       }
       if (input.type === 'toggle') {
         // DONE
-        return this.renderToggle(input, form);
+        return this.renderToggle(input, form, classes, lClass, dClass);
       }
 
       if (input.type === 'decimal') {
         // DONE
-        return this.renderDecimal(input, form);
+        return this.renderDecimal(input, form, classes, lClass, dClass);
       }
     });
   }
 
-  renderDecimal(input: FieldConfig, form: any) {
-    return <InputDecimal field={input} form={form} />;
+  renderDecimal(
+    input: FieldConfig,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ) {
+    return <InputDecimal field={input} form={form} classes={classes} />;
   }
 
-  renderInputNumber(input: FieldConfig, form: any) {
-    return <InputNumber field={input} form={form} meta={this.state} />;
+  renderInputNumber(
+    input: FieldConfig,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ) {
+    return (
+      <InputNumber
+        field={input}
+        form={form}
+        classes={classes}
+        lClass={lClass}
+        dClass={dClass}
+      />
+    );
   }
 
-  renderPassword(input: FieldConfig, form: any) {
-    return <Password field={input} form={form} meta={this.state} />;
+  renderPassword(
+    input: FieldConfig,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ) {
+    return (
+      <Password
+        field={input}
+        form={form}
+        classes={classes}
+        lClass={lClass}
+        dClass={dClass}
+      />
+    );
   }
 
-  renderToggle(input: FieldConfig, form: any) {
-    return <InputToggle field={input} form={form} meta={this.state} />;
+  renderToggle(
+    input: FieldConfig,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ) {
+    return (
+      <InputToggle
+        field={input}
+        form={form}
+        classes={classes}
+        lClass={lClass}
+        dClass={dClass}
+      />
+    );
   }
 
-  renderReactSelect(input: FieldConfig, form: any) {
+  renderReactSelect(
+    input: FieldConfig,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ) {
     return (
       <ReactSelect
         options={input.options}
@@ -147,50 +209,123 @@ class DynamicForm extends React.Component<Props, any> {
         onBlur={form.setFieldTouched}
         error={form.errors[input.name]}
         touched={form.touched[input.name]}
-        fieldConfig={input}
+        field={input}
         form={form}
         multi={true}
         meta={this.state}
+        classes={classes}
+        lClass={lClass}
+        dClass={dClass}
       />
     );
   }
 
-  renderTextbox(input: FieldConfig, form: any) {
-    return <InputText field={input} form={form} meta={this.state} />;
-  }
-
-  renderEmail(input: FieldConfig, form: any) {
-    return <InputEmail field={input} form={form} meta={this.state} />;
-  }
-
-  renderCheckbox(input: FieldConfig, form: any) {
-    return <Checkbox field={input} form={form} meta={this.state} />;
-    /*
+  renderTextbox(
+    input: FieldConfig,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ) {
     return (
-      <FormGroup check key={item.id}>
-        <Label check>
-          <Field
-            component={Checkbox}
-            name={item.name}
-            id={item.value}
-            label={item.label}
-          />
-        </Label>
-      </FormGroup>
+      <InputText
+        field={input}
+        form={form}
+        classes={classes}
+        lClass={lClass}
+        dClass={dClass}
+      />
     );
-    */
   }
 
-  renderCheckboxes(input: FieldConfig, form: any) {
-    return <CheckboxGroup field={input} form={form} meta={this.state} />;
+  renderEmail(
+    input: FieldConfig,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ) {
+    return (
+      <InputEmail
+        field={input}
+        form={form}
+        classes={classes}
+        lClass={lClass}
+        dClass={dClass}
+      />
+    );
   }
 
-  renderRadioButtons(input: FieldConfig, form: any) {
-    return <RadioButton field={input} form={form} meta={this.state} />;
+  renderCheckbox(
+    input: FieldConfig,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ) {
+    return (
+      <Checkbox
+        field={input}
+        form={form}
+        classes={classes}
+        lClass={lClass}
+        dClass={dClass}
+      />
+    );
   }
 
-  renderDatePicker(input: FieldConfig, form: any) {
-    return <CustomDatePicker field={input} form={form} meta={this.state} />;
+  renderCheckboxes(
+    input: FieldConfig,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ) {
+    return (
+      <CheckboxGroup
+        field={input}
+        form={form}
+        classes={classes}
+        lClass={lClass}
+        dClass={dClass}
+      />
+    );
+  }
+
+  renderRadioButtons(
+    input: FieldConfig,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ) {
+    return (
+      <RadioButton
+        field={input}
+        form={form}
+        classes={classes}
+        lClass={lClass}
+        dClass={dClass}
+      />
+    );
+  }
+
+  renderDatePicker(
+    input: FieldConfig,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ) {
+    return (
+      <CustomDatePicker
+        field={input}
+        form={form}
+        classes={classes}
+        lClass={lClass}
+        dClass={dClass}
+      />
+    );
   }
 
   renderFile(input: FieldConfig) {}
@@ -199,19 +334,53 @@ class DynamicForm extends React.Component<Props, any> {
 
   renderTimePicker(input: FieldConfig) {}
 
-  renderDataTimePicker(input: FieldConfig, form: any) {
-    return <CustomDatePicker field={input} form={form} meta={this.state} />;
+  renderDataTimePicker(
+    input: FieldConfig,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ) {
+    return (
+      <CustomDatePicker
+        field={input}
+        form={form}
+        classes={classes}
+        lClass={lClass}
+        dClass={dClass}
+      />
+    );
   }
 
-  renderSelect(input: FieldConfig) {
-    const cn = classNames({
-      'form-group': true,
-      [`col-md-${this.props.layoutGrid}`]: true,
-    });
-
+  renderSelect(
+    input: FieldConfig,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ) {
     return (
-      <div key={input.id} className={cn}>
-        <label>{input.label}</label>
+      <ReactSelect
+        options={input.options}
+        value={form.values[input.name]}
+        onChange={form.setFieldValue}
+        onBlur={form.setFieldTouched}
+        error={form.errors[input.name]}
+        touched={form.touched[input.name]}
+        field={input}
+        form={form}
+        multi={false}
+        meta={this.state}
+        classes={classes}
+        lClass={lClass}
+        dClass={dClass}
+      />
+    );
+
+    /*
+    return (
+      <div key={input.id} className={classes}>
+        <label className={lClass}>{input.label}</label>
         <Field
           name={input.name}
           render={(props: any) => {
@@ -232,19 +401,22 @@ class DynamicForm extends React.Component<Props, any> {
             ));
             const selectOptions = [defaultOption, ...options];
             return (
-              <select
-                className="form-control"
-                value={field.value}
-                {...field}
-                id={hasError}
-              >
-                {selectOptions}
-              </select>
+              <div className={dClass}>
+                <select
+                  className="form-control"
+                  value={field.value}
+                  {...field}
+                  id={hasError}
+                >
+                  {selectOptions}
+                </select>
+              </div>
             );
           }}
         />
       </div>
     );
+    */
   }
 
   getInitialValues(inputs: any) {
@@ -262,9 +434,48 @@ class DynamicForm extends React.Component<Props, any> {
   render() {
     const initialValues = this.getInitialValues(this.props.fields);
 
-    const formContainerClass = classNames({
+    let formContainerClass = classNames({
       row: this.props.layout === 'grid',
+      right: this.props.labelPosition === 'right',
     });
+
+    let cn: any;
+
+    if (this.props.layout === 'grid') {
+      cn = classNames({
+        'form-group': true,
+        [`col-md-${this.props.layoutGrid}`]: true,
+      });
+    } else if (this.props.layout === 'vertical') {
+      cn = classNames({
+        'form-group': true,
+      });
+    } else if (this.props.layout === 'horizontal') {
+      cn = classNames({
+        'form-group': true,
+        row: true,
+      });
+    }
+
+    let lClass: string;
+    let dClass: string;
+
+    if (this.props.layout === 'horizontal') {
+      lClass = classNames({
+        [`col-md-${this.props.layoutGrid}`]: true,
+      });
+
+      const rg = 12 - this.props.layoutGrid;
+
+      dClass = classNames({
+        [`col-md-${rg}`]: true,
+      });
+
+      formContainerClass = classNames({
+        horizontal: true,
+        right: this.props.labelPosition === 'right',
+      });
+    }
 
     return (
       <Formik
@@ -280,7 +491,13 @@ class DynamicForm extends React.Component<Props, any> {
                 <div>
                   <form onSubmit={form.handleSubmit}>
                     <div className={formContainerClass}>
-                      {this.renderFields(this.props.fields, form)}
+                      {this.renderFields(
+                        this.props.fields,
+                        form,
+                        cn,
+                        lClass,
+                        dClass
+                      )}
                     </div>
                     <div>
                       <button

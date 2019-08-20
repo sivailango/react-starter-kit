@@ -12,8 +12,8 @@ import InputHint from './forms/InputHint';
 
 import RequiredField from './forms/RequiredField';
 
-import InputProps from './../../models/InputProps';
-import InputOption from './../../models/InputOption';
+import InputProps from 'models/InputProps';
+import InputOption from 'models/InputOption';
 
 interface State {
   position: string;
@@ -87,20 +87,17 @@ class CheckboxGroup extends React.Component<InputProps, State> {
   */
 
   render() {
-    const cn = classNames({
-      'form-group': true,
-      [`col-md-${this.props.meta.layoutGrid}`]: true,
-    });
-
     return (
-      <div className={cn}>
-        <label htmlFor={this.props.field.id}>
+      <div className={this.props.classes}>
+        <label htmlFor={this.props.field.id} className={this.props.lClass}>
           {this.props.field.label} {this.state.isRequired && <RequiredField />}
         </label>
         <FieldArray
           name={this.props.field.name}
           render={arrayHelpers => (
-            <div className={this.state.containerClass}>
+            <div
+              className={`${this.state.containerClass} ${this.props.dClass}`}
+            >
               {this.props.field.options!.map((o: InputOption) => (
                 <div
                   key={o.id}

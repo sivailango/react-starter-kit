@@ -10,15 +10,10 @@ export default class InputToggle extends React.Component<any> {
     super(props);
   }
   public render() {
-    const cn = classNames({
-      'form-group': true,
-      [`col-md-${this.props.meta.layoutGrid}`]: true,
-    });
-
     return (
-      <div className={cn}>
-        <Label>{this.props.field.title}</Label>
-        <div>
+      <div className={this.props.classes}>
+        <label className={this.props.lClass}>{this.props.field.title}</label>
+        <div className={this.props.dClass}>
           <CustomInput
             type="switch"
             id={this.props.field.id}

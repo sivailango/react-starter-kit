@@ -53,14 +53,9 @@ export default class InputText extends Component<InputProps, any> {
   }
 
   render() {
-    const cn = classNames({
-      'form-group': true,
-      [`col-md-${this.props.meta.layoutGrid}`]: true,
-    });
-
     return (
-      <div className={cn} key={this.props.field.id}>
-        <label>
+      <div className={this.props.classes} key={this.props.field.id}>
+        <label htmlFor={this.props.field.id} className={this.props.lClass}>
           {this.props.field.label} {this.state.isRequired && <RequiredField />}
         </label>
         <Field
@@ -68,26 +63,30 @@ export default class InputText extends Component<InputProps, any> {
           render={(props: any) => {
             const { field } = props;
             return (
-              <input
-                {...field}
-                onChange={this.props.form.handleChange}
-                type="text"
-                className={
-                  this.props.form.errors[this.props.field.name] &&
-                  this.props.form.touched[this.props.field.name]
-                    ? 'form-control is-invalid'
-                    : 'form-control'
-                }
-              />
+              <div className={this.props.dClass}>
+                <input
+                  {...field}
+                  id={this.props.field.id}
+                  onChange={this.props.form.handleChange}
+                  type="text"
+                  className={
+                    this.props.form.errors[this.props.field.name] &&
+                    this.props.form.touched[this.props.field.name]
+                      ? 'form-control is-invalid'
+                      : 'form-control'
+                  }
+                />
+
+                {this.props.form.errors[this.props.field.name] &&
+                  this.props.form.touched[this.props.field.name] && (
+                    <InputHint
+                      message={this.props.form.errors[this.props.field.name]}
+                    />
+                  )}
+              </div>
             );
           }}
         />
-        {this.props.form.errors[this.props.field.name] &&
-          this.props.form.touched[this.props.field.name] && (
-            <InputHint
-              message={this.props.form.errors[this.props.field.name]}
-            />
-          )}
       </div>
     );
   }
