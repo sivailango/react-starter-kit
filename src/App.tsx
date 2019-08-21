@@ -10,9 +10,7 @@ import './App.css';
 import NotFound from 'containers/NotFound';
 
 import LoginContainer from 'containers/LoginContainer';
-import BlankPageContainer from 'containers/BlankPageContainer';
 import LoggedInContainer from 'containers/LoggedInContainer';
-import JsonForm from 'containers/JsonForm';
 
 class App extends Component {
   handleSubmit(values: any) {
@@ -34,7 +32,6 @@ class App extends Component {
           <LoggedInContainer>
             <Route path="/dashboard" component={BlankPageContainer} />
             <Route path="/blank" component={BlankPageContainer} />
-            <Route path="/forms/json" component={JsonForm} />
           </LoggedInContainer>
           */}
 

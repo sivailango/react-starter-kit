@@ -13,15 +13,19 @@ import { validateJsonForm } from 'utils/Form';
 interface Props {}
 interface State {}
 
-export default class JsonForm extends Component<Props, State> {
-  state = {};
+export default class JsonForm extends Component<Props> {
+  fields: any = [];
+
+  constructor(props: Props) {
+    super(props);
+    this.fields = validateJsonForm(fields);
+  }
 
   onFormSubmit(values: any) {
     console.log(values);
   }
 
   render() {
-    console.log(validateJsonForm(fields));
     const yepSchema = fields.reduce(createYupSchema, {});
     const validateSchema = Yup.object().shape(yepSchema);
 
@@ -31,7 +35,7 @@ export default class JsonForm extends Component<Props, State> {
           layout="horizontal"
           layoutGrid={4}
           labelPosition="right"
-          fields={fields}
+          fields={this.fields}
           validation={validateSchema}
           onFormSubmit={this.onFormSubmit}
         />

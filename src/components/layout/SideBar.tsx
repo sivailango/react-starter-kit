@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { Collapse, NavLink as BsNavLink } from 'reactstrap';
 import { NavLink } from 'react-router-dom';

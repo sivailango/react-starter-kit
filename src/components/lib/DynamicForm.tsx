@@ -128,13 +128,13 @@ class DynamicForm extends React.Component<Props, any> {
         return this.renderDecimal(input, form, classes, lClass, dClass);
       }
       if (input.type === 'array') {
-        // DONE
         return this.renderArray(input, form);
       }
     });
   }
 
   renderArray(input: FieldConfig, form: any) {
+    console.log(input);
     // console.log(input);
   }
 

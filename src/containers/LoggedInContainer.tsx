@@ -75,10 +75,22 @@ export default class LoggedInContainer extends Component<Props, State> {
                 component={DashboardContainer}
               />
               <Route path="/app/forms/json" exact component={JsonForm} />
-              <Route path="/app/forms/components" exact component={JsonForm} />
+              <Route
+                path="/app/forms/components"
+                exact
+                component={BlankPageContainer}
+              />
               <Route path="/app/charts" exact component={ChartsContainer} />
-              <Route path="/app/table/basic" exact component={JsonForm} />
-              <Route path="/app/table/dataTable" exact component={JsonForm} />
+              <Route
+                path="/app/table/basic"
+                exact
+                component={BlankPageContainer}
+              />
+              <Route
+                path="/app/table/dataTable"
+                exact
+                component={BlankPageContainer}
+              />
               <Route path="/app/blank" exact component={BlankPageContainer} />
             </Switch>
           </div>
