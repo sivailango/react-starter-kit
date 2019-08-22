@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import { Formik, Field, FieldArray } from 'formik';
 
@@ -20,7 +20,7 @@ export default class InputText extends Component<InputProps, any> {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.checkRequired();
   }
 
@@ -44,12 +44,6 @@ export default class InputText extends Component<InputProps, any> {
 
   handleChange(e: any) {
     this.props.form.setFieldValue(this.props.field.name, e.target.value);
-
-    /*
-    if (!new RegExp(this.props.field.validation.pattern).test(e.target.value)) {
-      e.preventDefault();
-    }
-    */
   }
 
   render() {
@@ -76,7 +70,6 @@ export default class InputText extends Component<InputProps, any> {
                       : 'form-control'
                   }
                 />
-
                 {this.props.form.errors[this.props.field.name] &&
                   this.props.form.touched[this.props.field.name] && (
                     <InputHint

@@ -1,13 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import { Formik, Field, FieldArray } from 'formik';
-
-import Yup from 'yup';
+import { Field, FieldArray } from 'formik';
 
 import classNames from 'classnames';
 
-import Checkbox from './Checkbox';
 import InputHint from './forms/InputHint';
 
 import RequiredField from './forms/RequiredField';

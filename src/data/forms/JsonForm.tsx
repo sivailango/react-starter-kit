@@ -177,10 +177,21 @@ export const fields: Array<FieldConfig> = [
         {
           name: 'name',
           type: 'text',
+          validations: [
+            {
+              type: 'required',
+              params: ['This field is required'],
+            },
+          ],
         },
         {
           name: 'age',
           type: 'text',
+        },
+        ,
+        {
+          name: 'id',
+          type: 'datepicker',
         },
       ],
     },

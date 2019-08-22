@@ -8,9 +8,11 @@ export interface IInputHintProps {
 }
 
 export default class InputHint extends React.Component<IInputHintProps> {
+  /*
   constructor(props: IInputHintProps) {
     super(props);
   }
+  */
   public render() {
     return (
       <div>

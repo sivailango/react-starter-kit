@@ -63,6 +63,75 @@ class DynamicForm extends React.Component<Props, any> {
     });
   }
 
+  renderField(
+    input: FieldConfig,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ) {
+    if (input.type === 'select') {
+      // DONE
+      return this.renderSelect(input, form, classes, lClass, dClass);
+    }
+
+    if (input.type === 'react_select') {
+      // DONE
+      return this.renderReactSelect(input, form, classes, lClass, dClass);
+    }
+    if (input.type === 'checkbox_group') {
+      // DONE
+      return this.renderCheckboxes(input, form, classes, lClass, dClass);
+    }
+    if (input.type === 'checkbox') {
+      // DONE
+      return this.renderCheckbox(input, form, classes, lClass, dClass);
+    }
+    if (input.type === 'number') {
+      // DONE
+      return this.renderInputNumber(input, form, classes, lClass, dClass);
+    }
+    if (input.type === 'textarea') {
+      return this.renderTextarea(input);
+    }
+    if (input.type === 'password') {
+      // DONE
+      return this.renderPassword(input, form, classes, lClass, dClass);
+    }
+    if (input.type === 'timepicker') {
+      return this.renderTimePicker(input);
+    }
+    if (input.type === 'datepicker') {
+      // DONE
+      return this.renderDatePicker(input, form, classes, lClass, dClass);
+    }
+    if (input.type === 'text') {
+      // DONE
+      // console.log(input);
+      return this.renderTextbox(input, form, classes, lClass, dClass);
+    }
+    if (input.type === 'email') {
+      // DONE
+      return this.renderEmail(input, form, classes, lClass, dClass);
+    }
+    if (input.type === 'radio') {
+      // DONE
+      return this.renderRadioButtons(input, form, classes, lClass, dClass);
+    }
+    if (input.type === 'toggle') {
+      // DONE
+      return this.renderToggle(input, form, classes, lClass, dClass);
+    }
+
+    if (input.type === 'decimal') {
+      // DONE
+      return this.renderDecimal(input, form, classes, lClass, dClass);
+    }
+    if (input.type === 'array') {
+      return this.renderArray(input, form, classes, lClass, dClass);
+    }
+  }
+
   renderFields(
     inputs: Array<FieldConfig>,
     form: any,
@@ -71,71 +140,42 @@ class DynamicForm extends React.Component<Props, any> {
     dClass: string
   ) {
     return inputs.map(input => {
-      if (input.type === 'select') {
-        // DONE
-        return this.renderSelect(input, form, classes, lClass, dClass);
-      }
-
-      if (input.type === 'react_select') {
-        // DONE
-        return this.renderReactSelect(input, form, classes, lClass, dClass);
-      }
-      if (input.type === 'checkbox_group') {
-        // DONE
-        return this.renderCheckboxes(input, form, classes, lClass, dClass);
-      }
-      if (input.type === 'checkbox') {
-        // DONE
-        return this.renderCheckbox(input, form, classes, lClass, dClass);
-      }
-      if (input.type === 'number') {
-        // DONE
-        return this.renderInputNumber(input, form, classes, lClass, dClass);
-      }
-      if (input.type === 'textarea') {
-        return this.renderTextarea(input);
-      }
-      if (input.type === 'password') {
-        // DONE
-        return this.renderPassword(input, form, classes, lClass, dClass);
-      }
-      if (input.type === 'timepicker') {
-        return this.renderTimePicker(input);
-      }
-      if (input.type === 'datepicker') {
-        // DONE
-        return this.renderDatePicker(input, form, classes, lClass, dClass);
-      }
-      if (input.type === 'text') {
-        // DONE
-        return this.renderTextbox(input, form, classes, lClass, dClass);
-      }
-      if (input.type === 'email') {
-        // DONE
-        return this.renderEmail(input, form, classes, lClass, dClass);
-      }
-      if (input.type === 'radio') {
-        // DONE
-        return this.renderRadioButtons(input, form, classes, lClass, dClass);
-      }
-      if (input.type === 'toggle') {
-        // DONE
-        return this.renderToggle(input, form, classes, lClass, dClass);
-      }
-
-      if (input.type === 'decimal') {
-        // DONE
-        return this.renderDecimal(input, form, classes, lClass, dClass);
-      }
-      if (input.type === 'array') {
-        return this.renderArray(input, form);
-      }
+      return this.renderField(input, form, classes, lClass, dClass);
     });
   }
 
-  renderArray(input: FieldConfig, form: any) {
-    console.log(input);
-    // console.log(input);
+  renderArray(
+    input: FieldConfig,
+    form: any,
+    classes: any,
+    lClass: string,
+    dClass: string
+  ): any {
+    return (
+      <FieldArray
+        name={input.name}
+        render={arrayHelpers => (
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  {input.arrayFields.headers.map((i: any, index: number) => (
+                    <th>{i.label}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  {input.arrayFields.fields.map((i: any, index: number) => (
+                    <td>{this.renderField(i, form, '', '', '')}</td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        )}
+      />
+    );
   }
 
   renderDecimal(
@@ -508,50 +548,6 @@ class DynamicForm extends React.Component<Props, any> {
                       )}
                     </div>
                     <div>
-                      <FieldArray
-                        name="friends"
-                        render={arrayHelpers => (
-                          <div>
-                            {form.values.friends &&
-                            form.values.friends.length > 0 ? (
-                              form.values.friends.map(
-                                (friend: any, index: number) => (
-                                  <div key={index}>
-                                    <Field name={`friends.${index}`} />
-                                    <button
-                                      type="button"
-                                      onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
-                                    >
-                                      -
-                                    </button>
-                                    <button
-                                      type="button"
-                                      onClick={() =>
-                                        arrayHelpers.insert(index, '')
-                                      } // insert an empty string at a position
-                                    >
-                                      +
-                                    </button>
-                                  </div>
-                                )
-                              )
-                            ) : (
-                              <button
-                                type="button"
-                                onClick={() => arrayHelpers.push('')}
-                              >
-                                {/* show this when user has removed all friends from the list */}
-                                Add a friend
-                              </button>
-                            )}
-                            <div>
-                              <button type="submit">Submit</button>
-                            </div>
-                          </div>
-                        )}
-                      />
-                    </div>
-                    <div>
                       <button
                         type="reset"
                         className="btn btn-secondary"
@@ -567,11 +563,11 @@ class DynamicForm extends React.Component<Props, any> {
                   </form>
                 </div>
               </Col>
-              {/*}
-              <Col sm={{ size: 6 }}>
-                <DisplayFormikState {...form} />
-              </Col>
-              */}
+              {
+                <Col sm={{ size: 6 }}>
+                  <DisplayFormikState {...form} />
+                </Col>
+              }
             </Row>
           );
         }}
