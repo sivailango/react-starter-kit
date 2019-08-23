@@ -27,7 +27,6 @@ export default function createYupSchema(schema: any, config: any) {
   }
 
   let validator = Yup[type]();
-
   validations.forEach((validation: any) => {
     const { params, type } = validation;
     if (!validator[type]) {

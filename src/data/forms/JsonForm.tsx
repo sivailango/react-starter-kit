@@ -166,13 +166,13 @@ export const fields: Array<FieldConfig> = [
     title: 'Is Agreed?',
   },
   {
-    id: 'family_members',
+    id: 'friends',
     label: 'is_enabled',
-    type: 'array',
-    name: 'family_members',
-    value: '',
+    type: 'array_fields',
+    name: 'friends',
+    value: [{ name: '' }],
     arrayFields: {
-      headers: [{ label: 'Name', grid: 3 }, { label: 'Age', grid: 3 }],
+      headers: [{ label: 'Name', grid: 3 }],
       fields: [
         {
           name: 'name',
@@ -182,16 +182,11 @@ export const fields: Array<FieldConfig> = [
               type: 'required',
               params: ['This field is required'],
             },
+            {
+              type: 'email',
+              params: ['Invalid Email format'],
+            },
           ],
-        },
-        {
-          name: 'age',
-          type: 'text',
-        },
-        ,
-        {
-          name: 'id',
-          type: 'datepicker',
         },
       ],
     },

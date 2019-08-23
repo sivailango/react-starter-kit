@@ -9,7 +9,7 @@ import createYupSchema from 'utils/YupSchemaGenerator';
 import { fields } from 'data/forms/JsonForm';
 
 import { validateJsonForm } from 'utils/Form';
-
+import * as _ from 'lodash';
 interface Props {}
 interface State {}
 
@@ -27,7 +27,60 @@ export default class JsonForm extends Component<Props> {
 
   render() {
     const yepSchema = fields.reduce(createYupSchema, {});
-    const validateSchema = Yup.object().shape(yepSchema);
+
+    const a = [
+      {
+        id: 'siva',
+        name: 'siva',
+        type: 'text',
+        validations: [
+          {
+            type: 'required',
+            params: ['This field is required'],
+          },
+          {
+            type: 'email',
+            params: ['Invalid Email format'],
+          },
+        ],
+      },
+      {
+        id: 'age',
+        name: 'age',
+        type: 'text',
+        validations: [
+          {
+            type: 'required',
+            params: ['This field is required'],
+          },
+        ],
+      },
+    ];
+
+    const a1 = a.reduce(createYupSchema, {});
+    const a1schema: any = {};
+    a1schema['friends'] = Yup.array().of(Yup.object().shape(a1));
+
+    // let a3 = yepSchema + a1schema;
+
+    const mergedSchema = _.merge(yepSchema, a1schema);
+
+    const validateSchema = Yup.object().shape(mergedSchema);
+
+    console.log(validateSchema);
+
+    const schema = Yup.object().shape({
+      firstName: Yup.string().required(),
+      friends: Yup.array().of(
+        Yup.object().shape({
+          name: Yup.string()
+            .min(4, 'too short')
+            .required('Required'), // these constraints take precedence
+        })
+      ),
+    });
+
+    console.log(schema);
 
     return (
       <div>

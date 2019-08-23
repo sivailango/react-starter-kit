@@ -34,7 +34,7 @@ export interface FieldConfig {
     | 'radio'
     | 'react_select'
     | 'decimal'
-    | 'array';
+    | 'array_fields';
   validations?: Array<{
     type:
       | 'required'
