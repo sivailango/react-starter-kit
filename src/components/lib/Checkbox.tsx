@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import InputProps from 'models/InputProps';
 
-class Checkbox extends React.Component<InputProps, any> {
+class Checkbox extends React.PureComponent<InputProps, any> {
   constructor(props: InputProps) {
     super(props);
   }

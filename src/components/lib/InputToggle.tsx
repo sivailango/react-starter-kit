@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { CustomInput, Form, FormGroup, Label } from 'reactstrap';
+import { CustomInput } from 'reactstrap';
 
 import classNames from 'classnames';
 
 export interface IInputToggleProps {}
 
-export default class InputToggle extends React.Component<any> {
+export default class InputToggle extends React.PureComponent<any> {
   constructor(props: any) {
     super(props);
   }

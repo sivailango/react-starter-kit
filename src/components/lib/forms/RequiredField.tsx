@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 
 interface Props {}
 interface State {}
 
-export default class RequiredField extends Component<Props, State> {
+export default class RequiredField extends React.PureComponent<Props, State> {
   state = {};
 
   render() {

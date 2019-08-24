@@ -18,7 +18,7 @@ export interface State {
   isRequired?: boolean;
 }
 
-export default class Password extends React.Component<InputProps, State> {
+export default class Password extends React.PureComponent<InputProps, State> {
   constructor(props: InputProps) {
     super(props);
 

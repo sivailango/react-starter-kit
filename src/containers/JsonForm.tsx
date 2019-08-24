@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import * as Yup from 'yup';
+// import * as Yup from 'yup';
 
 import DynamicForm from 'components/lib/DynamicForm';
-import FieldConfig from 'models/InputFieldConfig';
-import createYupSchema from 'utils/YupSchemaGenerator';
+// import FieldConfig from 'models/InputFieldConfig';
 
 import { fields } from 'data/forms/JsonForm';
 
 import { validateJsonForm, generateYupSchema } from 'utils/Form';
-import * as _ from 'lodash';
 interface Props {}
 interface State {}
 
-export default class JsonForm extends Component<Props> {
+export default class JsonForm extends React.PureComponent<Props> {
   fields: any = [];
 
   constructor(props: Props) {

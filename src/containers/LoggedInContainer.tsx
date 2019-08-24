@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { BrowserRouter as HashRouter, Route, Switch } from 'react-router-dom';
 
@@ -9,17 +9,20 @@ import ChartsContainer from './ChartsContainer';
 import BlankPageContainer from './BlankPageContainer';
 import JsonForm from './JsonForm';
 
-import Header from './../components/layout/Header';
-import SideBar from './../components/layout/SideBar';
-import SideBarXs from './../components/layout/SideBarXs';
-import Footer from './../components/layout/Footer';
+import Header from 'components/layout/Header';
+import SideBar from 'components/layout/SideBar';
+import SideBarXs from 'components/layout/SideBarXs';
+import Footer from 'components/layout/Footer';
 
 interface Props {}
 interface State {
   breakPoint: string;
 }
 
-export default class LoggedInContainer extends Component<Props, State> {
+export default class LoggedInContainer extends React.PureComponent<
+  Props,
+  State
+> {
   constructor(props: Props) {
     super(props);
     this.state = {

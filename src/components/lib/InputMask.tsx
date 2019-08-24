@@ -7,7 +7,7 @@ export interface InputMaskProps {
 }
 */
 
-export default class InputMask extends React.Component<any> {
+export default class InputMask extends React.PureComponent<any> {
   constructor(props) {
     super(props);
   }

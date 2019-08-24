@@ -21,7 +21,7 @@ interface MyFormValues {
   gender: string;
 }
 
-export default class SignupForm extends React.Component<Props> {
+export default class SignupForm extends React.PureComponent<Props> {
   constructor(props: any) {
     super(props);
     console.log(props.config);

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import { Formik, Field, FieldArray } from 'formik';
+import { Field } from 'formik';
 
 import classNames from 'classnames';
 
@@ -9,18 +9,20 @@ import RequiredField from './forms/RequiredField';
 
 import InputProps from 'models/InputProps';
 
-export default class InputText extends Component<InputProps, any> {
+export default class InputText extends React.PureComponent<InputProps, any> {
   state = {
     isRequired: false,
   };
 
   constructor(props: InputProps) {
     super(props);
+    console.log('InputText');
     this.checkDisabled();
     this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount() {
+    console.log('componentWillMount');
     this.checkRequired();
   }
 

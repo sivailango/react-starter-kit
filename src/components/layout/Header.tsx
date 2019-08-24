@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 // import { NavLink } from 'react-router-dom';
 
@@ -6,7 +6,6 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
@@ -22,7 +21,7 @@ interface State {
   isOpen: boolean;
 }
 
-class Header extends React.Component<Props, State> {
+class Header extends React.PureComponent<Props, State> {
   constructor(props: any) {
     super(props);
 

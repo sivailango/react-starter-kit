@@ -14,7 +14,7 @@ interface State {
   isRequired?: boolean;
 }
 
-class RadioButton extends React.Component<InputProps, State> {
+class RadioButton extends React.PureComponent<InputProps, State> {
   constructor(props: any) {
     super(props);
 

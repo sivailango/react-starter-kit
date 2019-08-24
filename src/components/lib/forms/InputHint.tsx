@@ -7,7 +7,7 @@ export interface IInputHintProps {
   warning?: string;
 }
 
-export default class InputHint extends React.Component<IInputHintProps> {
+export default class InputHint extends React.PureComponent<IInputHintProps> {
   /*
   constructor(props: IInputHintProps) {
     super(props);

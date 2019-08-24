@@ -20,7 +20,7 @@ interface State {
   isRequired?: boolean;
 }
 
-class CheckboxGroup extends React.Component<InputProps, State> {
+class CheckboxGroup extends React.PureComponent<InputProps, State> {
   constructor(props: any) {
     super(props);
     this.state = {

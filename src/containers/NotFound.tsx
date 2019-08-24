@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 interface Props {}
 interface State {}
 
-export default class NotFound extends Component<Props, State> {
+export default class NotFound extends React.PureComponent<Props, State> {
   state = {};
 
   render() {

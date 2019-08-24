@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 
 import Select from 'react-select';
-import classNames from 'classnames';
+// import classNames from 'classnames';
 
 import InputHint from './forms/InputHint';
 
-import InputProps from 'models/InputProps';
+// import InputProps from 'models/InputProps';
 
 import RequiredField from './forms/RequiredField';
 
@@ -13,7 +13,7 @@ interface State {
   isRequired?: boolean;
 }
 
-class ReactSelect extends React.Component<any, State> {
+class ReactSelect extends React.PureComponent<any, State> {
   constructor(props: any) {
     super(props);
   }

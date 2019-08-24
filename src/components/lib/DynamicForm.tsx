@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 import { Formik, Field, FieldArray } from 'formik';
 
 import classNames from 'classnames';
@@ -22,16 +22,7 @@ import InputEmail from './InputEmail';
 import CheckboxGroup from './CheckboxGroup';
 import RadioButton from './RadioButton';
 
-import {
-  Col,
-  Row,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-} from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 
 interface Props {
   fields: Array<FieldConfig>;
@@ -47,7 +38,7 @@ interface State {
   layout: any;
 }
 
-class DynamicForm extends React.Component<Props, any> {
+class DynamicForm extends React.PureComponent<Props, any> {
   static defaultProps = {
     layout: 'vertical',
     layoutGrid: 12,
@@ -115,6 +106,7 @@ class DynamicForm extends React.Component<Props, any> {
         const fNames = input.name.split('.');
         // console.log(index);
         input.name = `${fNames[0]}.${index}.${fNames[2]}`;
+        // alert('Welcom');
       }
       return this.renderTextbox(input, form, classes, lClass, dClass, index);
     }
@@ -175,8 +167,7 @@ class DynamicForm extends React.Component<Props, any> {
                 <tr>
                   {input.arrayFields.headers.map((i: any, index: number) => (
                     <th>
-                      {i.label}
-                      {i.required && <RequiredField />}
+                      {i.label} {i.required && <RequiredField />}
                     </th>
                   ))}
                   <th>Actions</th>
@@ -188,7 +179,8 @@ class DynamicForm extends React.Component<Props, any> {
                     {input.arrayFields.fields.map((i: any, index: number) => (
                       <td>
                         {this.renderField(i, form, '', '', '', rowIndex)}{' '}
-                        {rowIndex}
+                        {rowIndex} {form.values[input.name].length}{' '}
+                        {input.arrayFields.fields.length}
                       </td>
                     ))}
                     <td>
@@ -197,7 +189,14 @@ class DynamicForm extends React.Component<Props, any> {
                         className="secondary"
                         onClick={() => arrayHelpers.push({ name: '', age: '' })}
                       >
-                        Add Friend
+                        Add
+                      </button>
+                      <button
+                        type="button"
+                        className="secondary"
+                        onClick={() => arrayHelpers.remove(rowIndex)}
+                      >
+                        Remove
                       </button>
                     </td>
                   </tr>

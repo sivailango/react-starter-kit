@@ -16,8 +16,6 @@ export function validateJsonForm(fields: Array<FieldConfig>) {
     }
   });
 
-  console.log(fields);
-
   return fields;
 }
 

@@ -5,7 +5,7 @@ import { Alert } from 'reactstrap';
 
 interface Props {}
 
-class Form extends React.Component<InjectedFormProps<any> & Props> {
+class Form extends React.PureComponent<InjectedFormProps<any> & Props> {
   constructor(props: any) {
     super(props);
   }

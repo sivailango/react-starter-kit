@@ -16,7 +16,7 @@ const numberMask = createNumberMask({
   allowDecimal: true,
 });
 
-export default class InputNumber extends React.Component<any> {
+export default class InputNumber extends React.PureComponent<any> {
   state = {
     isRequired: false,
   };

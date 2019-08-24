@@ -8,7 +8,10 @@ import RequiredField from './forms/RequiredField';
 
 import InputProps from './../../models/InputProps';
 
-export default class CustomDatePicker extends React.Component<InputProps, any> {
+export default class CustomDatePicker extends React.PureComponent<
+  InputProps,
+  any
+> {
   state = {
     isRequired: false,
   };

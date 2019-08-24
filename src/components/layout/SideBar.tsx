@@ -11,7 +11,7 @@ interface State {
   activeSubMenu: any;
 }
 
-export default class SideBar extends React.Component<Props, State> {
+export default class SideBar extends React.PureComponent<Props, State> {
   constructor(props: any) {
     super(props);
     this.toggle = this.toggle.bind(this);
@@ -19,7 +19,6 @@ export default class SideBar extends React.Component<Props, State> {
   }
 
   toggle(e: number) {
-    console.log(e);
     if (this.state.activeSubMenu === e) {
       this.setState(state => ({
         activeSubMenu: undefined,

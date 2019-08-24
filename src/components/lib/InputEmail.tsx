@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import InputProps from './../../models/InputProps';
+import InputProps from 'models/InputProps';
 
 import InputText from './InputText';
 
-export default class InputEmail extends Component<InputProps, any> {
+export default class InputEmail extends React.PureComponent<InputProps, any> {
   state = {};
 
   constructor(props: InputProps) {

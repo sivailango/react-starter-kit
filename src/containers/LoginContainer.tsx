@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import * as Yup from 'yup';
 
 import DynamicForm from 'components/lib/DynamicForm';
-import FieldConfig from 'models/InputFieldConfig';
+// import FieldConfig from 'models/InputFieldConfig';
 import createYupSchema from 'utils/YupSchemaGenerator';
 
 import { fields } from 'data/forms/LoginForm';
@@ -11,7 +11,7 @@ import { fields } from 'data/forms/LoginForm';
 interface Props {}
 interface State {}
 
-export default class LoginContainer extends Component<Props, State> {
+export default class LoginContainer extends React.PureComponent<Props, State> {
   state = {};
 
   onFormSubmit(values: any) {

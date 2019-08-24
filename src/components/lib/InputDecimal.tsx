@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
 
-class InputDecimal extends React.Component<any, any> {
+class InputDecimal extends React.PureComponent<any, any> {
   constructor(props: any) {
     super(props);
     this.handleChange = this.handleChange.bind(this);

@@ -11,7 +11,7 @@ interface State {
   activeSubMenu: any;
 }
 
-export default class SideBarXs extends React.Component<Props, State> {
+export default class SideBarXs extends React.PureComponent<Props, State> {
   constructor(props: any) {
     super(props);
     this.toggle = this.toggle.bind(this);
