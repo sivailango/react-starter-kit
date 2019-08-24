@@ -3,6 +3,8 @@ import { Formik, Field, FieldArray } from 'formik';
 
 import classNames from 'classnames';
 
+import RequiredField from 'components/lib/forms/RequiredField';
+
 import FieldConfig from 'models/InputFieldConfig';
 
 import { DisplayFormikState } from './FormikDebug';
@@ -68,7 +70,8 @@ class DynamicForm extends React.Component<Props, any> {
     form: any,
     classes: any,
     lClass: string,
-    dClass: string
+    dClass: string,
+    index: number
   ) {
     if (input.type === 'select') {
       // DONE
@@ -107,8 +110,13 @@ class DynamicForm extends React.Component<Props, any> {
     }
     if (input.type === 'text') {
       // DONE
-      // console.log(input);
-      return this.renderTextbox(input, form, classes, lClass, dClass);
+      if (input.isArrayField) {
+        console.log(input);
+        const fNames = input.name.split('.');
+        // console.log(index);
+        input.name = `${fNames[0]}.${index}.${fNames[2]}`;
+      }
+      return this.renderTextbox(input, form, classes, lClass, dClass, index);
     }
     if (input.type === 'email') {
       // DONE
@@ -137,11 +145,17 @@ class DynamicForm extends React.Component<Props, any> {
     form: any,
     classes: any,
     lClass: string,
-    dClass: string
+    dClass: string,
+    index?: number
   ) {
     return inputs.map(input => {
-      return this.renderField(input, form, classes, lClass, dClass);
+      return this.renderField(input, form, classes, lClass, dClass, index);
     });
+  }
+
+  check(input: FieldConfig, f: any) {
+    console.log(input, f);
+    return <h1>Hello</h1>;
   }
 
   renderArray(
@@ -160,16 +174,34 @@ class DynamicForm extends React.Component<Props, any> {
               <thead>
                 <tr>
                   {input.arrayFields.headers.map((i: any, index: number) => (
-                    <th>{i.label}</th>
+                    <th>
+                      {i.label}
+                      {i.required && <RequiredField />}
+                    </th>
                   ))}
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  {input.arrayFields.fields.map((i: any, index: number) => (
-                    <td>{this.renderField(i, form, '', '', '')}</td>
-                  ))}
-                </tr>
+                {form.values[input.name].map((f: any, rowIndex: number) => (
+                  <tr>
+                    {input.arrayFields.fields.map((i: any, index: number) => (
+                      <td>
+                        {this.renderField(i, form, '', '', '', rowIndex)}{' '}
+                        {rowIndex}
+                      </td>
+                    ))}
+                    <td>
+                      <button
+                        type="button"
+                        className="secondary"
+                        onClick={() => arrayHelpers.push({ name: '', age: '' })}
+                      >
+                        Add Friend
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -273,8 +305,10 @@ class DynamicForm extends React.Component<Props, any> {
     form: any,
     classes: any,
     lClass: string,
-    dClass: string
+    dClass: string,
+    index: number
   ) {
+    input.arrayIndex = index;
     return (
       <InputText
         field={input}
@@ -563,11 +597,9 @@ class DynamicForm extends React.Component<Props, any> {
                   </form>
                 </div>
               </Col>
-              {
-                <Col sm={{ size: 6 }}>
-                  <DisplayFormikState {...form} />
-                </Col>
-              }
+              <Col sm={{ size: 6 }}>
+                <DisplayFormikState {...form} />
+              </Col>
             </Row>
           );
         }}

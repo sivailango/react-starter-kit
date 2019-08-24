@@ -47,11 +47,19 @@ export default class InputText extends Component<InputProps, any> {
   }
 
   render() {
-    return (
-      <div className={this.props.classes} key={this.props.field.id}>
-        <label htmlFor={this.props.field.id} className={this.props.lClass}>
+    let label: any;
+
+    if (!this.props.field.isArrayField) {
+      label = (
+        <label className={this.props.lClass} htmlFor={this.props.field.id}>
           {this.props.field.label} {this.state.isRequired && <RequiredField />}
         </label>
+      );
+    }
+
+    return (
+      <div className={this.props.classes} key={this.props.field.id}>
+        {label}
         <Field
           name={this.props.field.name}
           render={(props: any) => {

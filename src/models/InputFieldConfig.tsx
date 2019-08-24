@@ -2,12 +2,20 @@ import InputOption from './InputOption';
 
 export interface FieldConfig {
   arrayFields?: {
-    headers: Array<{ label: string; grid: number }>;
+    headers: Array<{
+      label: string;
+      grid: number;
+      key: string;
+      required?: boolean;
+    }>;
     fields: Array<FieldConfig>;
   };
   classNames?: string;
   disabled?: boolean;
   id?: string;
+  isArrayField?: boolean;
+  arrayIndex?: number;
+  arrayFieldName?: string;
   label?: string;
   name: string;
   place?: number;

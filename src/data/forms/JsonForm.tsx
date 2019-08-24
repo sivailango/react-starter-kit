@@ -170,9 +170,12 @@ export const fields: Array<FieldConfig> = [
     label: 'is_enabled',
     type: 'array_fields',
     name: 'friends',
-    value: [{ name: '' }],
+    value: [{ name: '', age: '' }],
     arrayFields: {
-      headers: [{ label: 'Name', grid: 3 }],
+      headers: [
+        { label: 'Name', grid: 3, key: 'name', required: true },
+        { label: 'Age', grid: 3, key: 'age', required: false },
+      ],
       fields: [
         {
           name: 'name',
@@ -187,6 +190,10 @@ export const fields: Array<FieldConfig> = [
               params: ['Invalid Email format'],
             },
           ],
+        },
+        {
+          name: 'age',
+          type: 'text',
         },
       ],
     },
