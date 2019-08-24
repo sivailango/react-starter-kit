@@ -102,13 +102,15 @@ class DynamicForm extends React.PureComponent<Props, any> {
     if (input.type === 'text') {
       // DONE
       if (input.isArrayField) {
-        console.log(input);
         const fNames = input.name.split('.');
         // console.log(index);
         input.name = `${fNames[0]}.${index}.${fNames[2]}`;
+        console.log(input, index);
         // alert('Welcom');
+        return this.renderTextbox(input, form, classes, lClass, dClass, index);
+      } else {
+        return this.renderTextbox(input, form, classes, lClass, dClass, index);
       }
-      return this.renderTextbox(input, form, classes, lClass, dClass, index);
     }
     if (input.type === 'email') {
       // DONE
@@ -132,6 +134,10 @@ class DynamicForm extends React.PureComponent<Props, any> {
     }
   }
 
+  check() {
+    console.log('--------');
+  }
+
   renderFields(
     inputs: Array<FieldConfig>,
     form: any,
@@ -143,11 +149,6 @@ class DynamicForm extends React.PureComponent<Props, any> {
     return inputs.map(input => {
       return this.renderField(input, form, classes, lClass, dClass, index);
     });
-  }
-
-  check(input: FieldConfig, f: any) {
-    console.log(input, f);
-    return <h1>Hello</h1>;
   }
 
   renderArray(
@@ -177,11 +178,7 @@ class DynamicForm extends React.PureComponent<Props, any> {
                 {form.values[input.name].map((f: any, rowIndex: number) => (
                   <tr>
                     {input.arrayFields.fields.map((i: any, index: number) => (
-                      <td>
-                        {this.renderField(i, form, '', '', '', rowIndex)}{' '}
-                        {rowIndex} {form.values[input.name].length}{' '}
-                        {input.arrayFields.fields.length}
-                      </td>
+                      <td>{this.renderField(i, form, '', '', '', rowIndex)}</td>
                     ))}
                     <td>
                       <button
@@ -199,6 +196,7 @@ class DynamicForm extends React.PureComponent<Props, any> {
                         Remove
                       </button>
                     </td>
+                    {this.check()}
                   </tr>
                 ))}
               </tbody>
@@ -308,6 +306,7 @@ class DynamicForm extends React.PureComponent<Props, any> {
     index: number
   ) {
     input.arrayIndex = index;
+    console.log(input.name);
     return (
       <InputText
         field={input}

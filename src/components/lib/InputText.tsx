@@ -9,20 +9,20 @@ import RequiredField from './forms/RequiredField';
 
 import InputProps from 'models/InputProps';
 
-export default class InputText extends React.PureComponent<InputProps, any> {
+import * as _ from 'lodash';
+
+export default class InputText extends React.Component<InputProps, any> {
   state = {
     isRequired: false,
   };
 
   constructor(props: InputProps) {
     super(props);
-    console.log('InputText');
     this.checkDisabled();
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillMount() {
-    console.log('componentWillMount');
+  componentDidMount() {
     this.checkRequired();
   }
 
@@ -44,12 +44,22 @@ export default class InputText extends React.PureComponent<InputProps, any> {
     }
   }
 
+  componentDidCatch() {}
+
   handleChange(e: any) {
     this.props.form.setFieldValue(this.props.field.name, e.target.value);
   }
 
+  shouldComponentUpdate(nextProps: any, nextState: any) {
+    return _.isEqual(this.props, nextProps);
+  }
+
   render() {
     let label: any;
+
+    console.log(this.props.field.arrayIndex);
+
+    // console.log(this.props.field);
 
     if (!this.props.field.isArrayField) {
       label = (
@@ -57,10 +67,11 @@ export default class InputText extends React.PureComponent<InputProps, any> {
           {this.props.field.label} {this.state.isRequired && <RequiredField />}
         </label>
       );
+    } else {
     }
 
     return (
-      <div className={this.props.classes} key={this.props.field.id}>
+      <div className={this.props.classes} key={this.props.field.name}>
         {label}
         <Field
           name={this.props.field.name}
@@ -70,7 +81,7 @@ export default class InputText extends React.PureComponent<InputProps, any> {
               <div className={this.props.dClass}>
                 <input
                   {...field}
-                  id={this.props.field.id}
+                  id={this.props.field.name}
                   onChange={this.props.form.handleChange}
                   type="text"
                   className={
@@ -80,12 +91,38 @@ export default class InputText extends React.PureComponent<InputProps, any> {
                       : 'form-control'
                   }
                 />
-                {this.props.form.errors[this.props.field.name] &&
-                  this.props.form.touched[this.props.field.name] && (
-                    <InputHint
-                      message={this.props.form.errors[this.props.field.name]}
-                    />
-                  )}
+                {this.props.form.touched[this.props.field.name] && (
+                  <InputHint
+                    message={this.props.form.errors[this.props.field.name]}
+                  />
+                )}
+                {/*
+                  this.props.field.isArrayField
+                  ? this.props.form.errors[this.props.field.arrayFieldName] &&
+                    this.props.form.errors[this.props.field.arrayFieldName][
+                      this.props.field.arrayIndex
+                    ] &&
+                    this.props.form.errors[this.props.field.arrayFieldName][
+                      this.props.field.arrayIndex
+                    ][this.props.field.id] &&
+                    this.props.form.touched[this.props.field.arrayFieldName][
+                      this.props.field.arrayIndex
+                    ][this.props.field.id] && (
+                      <InputHint
+                        message={
+                          this.props.form.errors[
+                            this.props.field.arrayFieldName
+                          ][this.props.field.arrayIndex][this.props.field.id]
+                        }
+                      />
+                    )
+                  : this.props.form.errors[this.props.field.name] &&
+                    this.props.form.touched[this.props.field.name] && (
+                      <InputHint
+                        message={this.props.form.errors[this.props.field.name]}
+                      />
+                    )
+                */}
               </div>
             );
           }}

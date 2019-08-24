@@ -9,9 +9,9 @@ export function validateJsonForm(fields: Array<FieldConfig>) {
     if (f1.type === 'array_fields') {
       f1.arrayFields.fields.forEach(function(f2: any, i: number) {
         f2['id'] = f2['name'];
+        f2['arrayFieldName'] = f1['name'];
         f2['name'] = `${f1.name}.0.${f2.name}`;
         f2['isArrayField'] = true;
-        f2['arrayFieldName'] = f2['name'];
       });
     }
   });
