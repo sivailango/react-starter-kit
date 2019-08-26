@@ -32,6 +32,7 @@ interface Props {
   validation?: any;
   onFormSubmit: Function;
   labelPosition?: 'left' | 'right';
+  getForm?: Function;
 }
 
 interface State {
@@ -565,6 +566,7 @@ class DynamicForm extends React.PureComponent<Props, any> {
         validationSchema={this.props.validation}
         initialValues={initialValues}
         render={form => {
+          this.props.getForm(form);
           return (
             <Row>
               <Col sm={{ size: 12 }}>
@@ -594,9 +596,6 @@ class DynamicForm extends React.PureComponent<Props, any> {
                     </div>
                   </form>
                 </div>
-              </Col>
-              <Col sm={{ size: 6 }}>
-                <DisplayFormikState {...form} />
               </Col>
             </Row>
           );

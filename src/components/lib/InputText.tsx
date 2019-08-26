@@ -14,6 +14,8 @@ import * as _ from 'lodash';
 export default class InputText extends React.Component<InputProps, any> {
   state = {
     isRequired: false,
+    name: '',
+    arrayIndex: 0,
   };
 
   constructor(props: InputProps) {
@@ -42,24 +44,32 @@ export default class InputText extends React.Component<InputProps, any> {
         });
       }
     }
+
+    if (this.props.field.isArrayField) {
+      const fNames = this.props.field.name.split('.');
+      const name = `${fNames[0]}.${this.props.field.arrayIndex}.${fNames[2]}`;
+      this.setState({
+        name: name,
+        arrayIndex: this.props.field.arrayIndex,
+      });
+    } else {
+      this.setState({
+        name: this.props.field.name,
+      });
+    }
   }
 
   componentDidCatch() {}
 
   handleChange(e: any) {
     this.props.form.setFieldValue(this.props.field.name, e.target.value);
-  }
-
-  shouldComponentUpdate(nextProps: any, nextState: any) {
-    return _.isEqual(this.props, nextProps);
+    this.props.field.onChange();
   }
 
   render() {
     let label: any;
-
-    console.log(this.props.field.arrayIndex);
-
-    // console.log(this.props.field);
+    let error: any;
+    let classNames: string;
 
     if (!this.props.field.isArrayField) {
       label = (
@@ -67,62 +77,81 @@ export default class InputText extends React.Component<InputProps, any> {
           {this.props.field.label} {this.state.isRequired && <RequiredField />}
         </label>
       );
+      error = this.props.form.errors[this.props.field.name] &&
+        this.props.form.touched[this.props.field.name] && (
+          <InputHint message={this.props.form.errors[this.props.field.name]} />
+        );
+
+      classNames =
+        this.props.form.errors[this.props.field.name] &&
+        this.props.form.touched[this.props.field.name]
+          ? 'form-control is-invalid'
+          : 'form-control';
     } else {
+      error = this.props.form.errors[this.props.field.arrayFieldName] &&
+        this.props.form.errors[this.props.field.arrayFieldName][
+          this.state.arrayIndex
+        ] &&
+        this.props.form.errors[this.props.field.arrayFieldName][
+          this.state.arrayIndex
+        ][this.props.field.id] &&
+        this.props.form.touched[this.props.field.arrayFieldName] &&
+        this.props.form.touched[this.props.field.arrayFieldName][
+          this.state.arrayIndex
+        ] && (
+          <InputHint
+            message={
+              this.props.form.errors[this.props.field.arrayFieldName][
+                this.state.arrayIndex
+              ][this.props.field.id]
+            }
+          />
+        );
+
+      if (
+        this.props.form.errors[this.props.field.arrayFieldName] &&
+        this.props.form.errors[this.props.field.arrayFieldName][
+          this.state.arrayIndex
+        ] &&
+        this.props.form.errors[this.props.field.arrayFieldName][
+          this.state.arrayIndex
+        ][this.props.field.id] &&
+        this.props.form.touched[this.props.field.arrayFieldName] &&
+        this.props.form.touched[this.props.field.arrayFieldName][
+          this.state.arrayIndex
+        ]
+      ) {
+        classNames =
+          this.props.form.errors[this.props.field.arrayFieldName][
+            this.state.arrayIndex
+          ][this.props.field.id] &&
+          this.props.form.touched[this.props.field.arrayFieldName][
+            this.state.arrayIndex
+          ][this.props.field.id]
+            ? 'form-control is-invalid'
+            : 'form-control';
+      } else {
+        classNames = 'form-control';
+      }
     }
 
     return (
       <div className={this.props.classes} key={this.props.field.name}>
         {label}
         <Field
-          name={this.props.field.name}
+          name={this.state.name}
           render={(props: any) => {
             const { field } = props;
             return (
               <div className={this.props.dClass}>
                 <input
                   {...field}
-                  id={this.props.field.name}
-                  onChange={this.props.form.handleChange}
+                  id={this.state.name}
                   type="text"
-                  className={
-                    this.props.form.errors[this.props.field.name] &&
-                    this.props.form.touched[this.props.field.name]
-                      ? 'form-control is-invalid'
-                      : 'form-control'
-                  }
+                  onChange={this.handleChange}
+                  className={classNames}
                 />
-                {this.props.form.touched[this.props.field.name] && (
-                  <InputHint
-                    message={this.props.form.errors[this.props.field.name]}
-                  />
-                )}
-                {/*
-                  this.props.field.isArrayField
-                  ? this.props.form.errors[this.props.field.arrayFieldName] &&
-                    this.props.form.errors[this.props.field.arrayFieldName][
-                      this.props.field.arrayIndex
-                    ] &&
-                    this.props.form.errors[this.props.field.arrayFieldName][
-                      this.props.field.arrayIndex
-                    ][this.props.field.id] &&
-                    this.props.form.touched[this.props.field.arrayFieldName][
-                      this.props.field.arrayIndex
-                    ][this.props.field.id] && (
-                      <InputHint
-                        message={
-                          this.props.form.errors[
-                            this.props.field.arrayFieldName
-                          ][this.props.field.arrayIndex][this.props.field.id]
-                        }
-                      />
-                    )
-                  : this.props.form.errors[this.props.field.name] &&
-                    this.props.form.touched[this.props.field.name] && (
-                      <InputHint
-                        message={this.props.form.errors[this.props.field.name]}
-                      />
-                    )
-                */}
+                {error}
               </div>
             );
           }}
