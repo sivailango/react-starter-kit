@@ -63,7 +63,7 @@ export default class InputText extends React.Component<InputProps, any> {
 
   handleChange(e: any) {
     this.props.form.setFieldValue(this.props.field.name, e.target.value);
-    this.props.field.onChange();
+    this.props.onEvent(e);
   }
 
   render() {

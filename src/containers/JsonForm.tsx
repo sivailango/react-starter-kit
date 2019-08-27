@@ -11,11 +11,12 @@ import { validateJsonForm, generateYupSchema } from 'utils/Form';
 interface Props {}
 interface State {}
 
-export default class JsonForm extends React.PureComponent<Props> {
+export default class JsonForm extends React.PureComponent<Props, any> {
   fields: any = [];
 
   constructor(props: Props) {
     super(props);
+    this.changeHandler = this.changeHandler.bind(this);
     const f: Array<FieldConfig> = [
       {
         id: 'firstName',
@@ -215,11 +216,25 @@ export default class JsonForm extends React.PureComponent<Props> {
         },
       },
     ];
+    this.state = {
+      form: f,
+    };
     this.fields = validateJsonForm(f);
   }
 
   onChangeTest() {
     console.log('Hellow');
+  }
+
+  changeHandler(e: any) {
+    console.log(e.type);
+    console.log(fields);
+    fields[1].label = 'Siva';
+    this.setState({
+      form: fields,
+    });
+
+    console.log(this.state);
   }
 
   onFormSubmit(values: any) {
@@ -232,17 +247,18 @@ export default class JsonForm extends React.PureComponent<Props> {
 
   render() {
     const validateSchema = generateYupSchema(fields);
-
+    console.log(this.state);
     return (
       <div>
         <DynamicForm
           layout="horizontal"
           layoutGrid={4}
           labelPosition="right"
-          fields={this.fields}
+          fields={this.state.form}
           validation={validateSchema}
           onFormSubmit={this.onFormSubmit}
-          getForm={this.getForm}
+          // getForm={this.getForm}
+          changeHandler={this.changeHandler}
         />
       </div>
     );

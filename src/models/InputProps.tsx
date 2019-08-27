@@ -6,4 +6,5 @@ export default interface InputProps {
   classes?: any;
   lClass?: string;
   dClass?: string;
+  onEvent?: Function;
 }
