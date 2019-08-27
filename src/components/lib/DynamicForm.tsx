@@ -3,6 +3,8 @@ import { Formik, Field, FieldArray } from 'formik';
 
 import classNames from 'classnames';
 
+import * as _ from 'lodash';
+
 import RequiredField from 'components/lib/forms/RequiredField';
 
 import FieldConfig from 'models/InputFieldConfig';
@@ -32,7 +34,6 @@ interface Props {
   validation?: any;
   onFormSubmit: Function;
   labelPosition?: 'left' | 'right';
-  // getForm?: Function;
   changeHandler?: Function;
 }
 
@@ -67,77 +68,52 @@ class DynamicForm extends React.PureComponent<Props, any> {
     index: number
   ) {
     if (input.type === 'select') {
-      // DONE
       return this.renderSelect(input, form, classes, lClass, dClass);
     }
 
     if (input.type === 'react_select') {
-      // DONE
       return this.renderReactSelect(input, form, classes, lClass, dClass);
     }
     if (input.type === 'checkbox_group') {
-      // DONE
       return this.renderCheckboxes(input, form, classes, lClass, dClass);
     }
     if (input.type === 'checkbox') {
-      // DONE
       return this.renderCheckbox(input, form, classes, lClass, dClass);
     }
     if (input.type === 'number') {
-      // DONE
       return this.renderInputNumber(input, form, classes, lClass, dClass);
     }
     if (input.type === 'textarea') {
       return this.renderTextarea(input);
     }
     if (input.type === 'password') {
-      // DONE
       return this.renderPassword(input, form, classes, lClass, dClass);
     }
     if (input.type === 'timepicker') {
       return this.renderTimePicker(input);
     }
     if (input.type === 'datepicker') {
-      // DONE
       return this.renderDatePicker(input, form, classes, lClass, dClass);
     }
     if (input.type === 'text') {
-      // DONE
-      if (input.isArrayField) {
-        const fNames = input.name.split('.');
-        // console.log(index);
-        input.name = `${fNames[0]}.${index}.${fNames[2]}`;
-        console.log(input, index);
-        // alert('Welcom');
-        return this.renderTextbox(input, form, classes, lClass, dClass, index);
-      } else {
-        return this.renderTextbox(input, form, classes, lClass, dClass, index);
-      }
+      return this.renderTextbox(input, form, classes, lClass, dClass, index);
     }
     if (input.type === 'email') {
-      // DONE
       return this.renderEmail(input, form, classes, lClass, dClass);
     }
     if (input.type === 'radio') {
-      // DONE
       return this.renderRadioButtons(input, form, classes, lClass, dClass);
     }
     if (input.type === 'toggle') {
-      // DONE
       return this.renderToggle(input, form, classes, lClass, dClass);
     }
 
     if (input.type === 'decimal') {
-      // DONE
       return this.renderDecimal(input, form, classes, lClass, dClass);
     }
     if (input.type === 'array_fields') {
       return this.renderArray(input, form, classes, lClass, dClass);
     }
-  }
-
-  check() {
-    console.log('--------');
   }
 
   renderFields(
@@ -160,6 +136,12 @@ class DynamicForm extends React.PureComponent<Props, any> {
     lClass: string,
     dClass: string
   ): any {
+    const o = {};
+
+    _.map(input.arrayFields.headers, function(i) {
+      return (o[i.key] = '');
+    });
+
     return (
       <FieldArray
         name={input.name}
@@ -186,7 +168,7 @@ class DynamicForm extends React.PureComponent<Props, any> {
                       <button
                         type="button"
                         className="secondary"
-                        onClick={() => arrayHelpers.push({ name: '', age: '' })}
+                        onClick={() => arrayHelpers.push(o)}
                       >
                         Add
                       </button>
@@ -198,7 +180,6 @@ class DynamicForm extends React.PureComponent<Props, any> {
                         Remove
                       </button>
                     </td>
-                    {this.check()}
                   </tr>
                 ))}
               </tbody>
@@ -308,7 +289,6 @@ class DynamicForm extends React.PureComponent<Props, any> {
     index: number
   ) {
     input.arrayIndex = index;
-    console.log(input.name);
     return (
       <InputText
         field={input}
@@ -457,49 +437,9 @@ class DynamicForm extends React.PureComponent<Props, any> {
         classes={classes}
         lClass={lClass}
         dClass={dClass}
+        onEvent={this.props.changeHandler}
       />
     );
-
-    /*
-    return (
-      <div key={input.id} className={classes}>
-        <label className={lClass}>{input.label}</label>
-        <Field
-          name={input.name}
-          render={(props: any) => {
-            const { field } = props;
-            const { errors, touched } = props.form;
-            const hasError =
-              errors[input.name] && touched[input.name] ? 'hasError' : '';
-            const defaultOption = (
-              <option key="default" value="Please Select">
-                Please Select
-              </option>
-            );
-            const options = input.options!.map(i => (
-              <option key={i.value} value={i.label}>
-                {' '}
-                {i.label}{' '}
-              </option>
-            ));
-            const selectOptions = [defaultOption, ...options];
-            return (
-              <div className={dClass}>
-                <select
-                  className="form-control"
-                  value={field.value}
-                  {...field}
-                  id={hasError}
-                >
-                  {selectOptions}
-                </select>
-              </div>
-            );
-          }}
-        />
-      </div>
-    );
-    */
   }
 
   getInitialValues(inputs: any) {
@@ -598,6 +538,9 @@ class DynamicForm extends React.PureComponent<Props, any> {
                     </div>
                   </form>
                 </div>
+              </Col>
+              <Col sm={{ size: 6 }}>
+                <DisplayFormikState {...form} />
               </Col>
             </Row>
           );

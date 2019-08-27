@@ -11,19 +11,25 @@ import RequiredField from './forms/RequiredField';
 
 interface State {
   isRequired?: boolean;
+  name: string;
+  arrayIndex: number;
 }
 
 class ReactSelect extends React.PureComponent<any, State> {
   constructor(props: any) {
     super(props);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount() {
     this.checkRequired();
   }
 
-  handleChange = (value: any) => {
+  handleChange = (value: any, a: any) => {
+    console.log(a);
     this.props.onChange(this.props.field.name, value);
+    console.log(value);
+    this.props.onEvent(value);
   };
 
   handleBlur = () => {
@@ -41,6 +47,19 @@ class ReactSelect extends React.PureComponent<any, State> {
           isRequired: true,
         });
       }
+    }
+
+    if (this.props.field.isArrayField) {
+      const fNames = this.props.field.name.split('.');
+      const name = `${fNames[0]}.${this.props.field.arrayIndex}.${fNames[2]}`;
+      this.setState({
+        name: name,
+        arrayIndex: this.props.field.arrayIndex,
+      });
+    } else {
+      this.setState({
+        name: this.props.field.name,
+      });
     }
   }
 

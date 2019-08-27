@@ -170,11 +170,12 @@ export const fields: Array<FieldConfig> = [
     label: 'is_enabled',
     type: 'array_fields',
     name: 'friends',
-    value: [{ name: '', age: '' }],
+    value: [{ name: '', age: '', country: '' }],
     arrayFields: {
       headers: [
         { label: 'Name', grid: 3, key: 'name', required: true },
         { label: 'Age', grid: 3, key: 'age', required: false },
+        { label: 'Countries', grid: 3, key: 'country', required: false },
       ],
       fields: [
         {
@@ -194,6 +195,22 @@ export const fields: Array<FieldConfig> = [
         {
           name: 'age',
           type: 'text',
+        },
+        {
+          type: 'react_select',
+          name: 'country',
+          value: [],
+          options: [
+            { value: 'india', label: 'India' },
+            { value: 'us', label: 'US' },
+            { value: 'uk', label: 'UK' },
+          ],
+          validations: [
+            {
+              type: 'required',
+              params: ['This field is required'],
+            },
+          ],
         },
       ],
     },
